@@ -1,0 +1,1 @@
+//gestion du struct : nouvelles lignes, affichage de l'user, couleurs si besoin, etc
