@@ -76,20 +76,22 @@ En gros : une "BIG" structure qui contient les infos generales mais aussi une li
 Ce que ca donne avec la phrase d'exemple au dessus:
 
 +++++++++++++
-# cmds:
-   ## cmd 1:
-     #### infile: 0 (default)
-     #### outfile: 1 (redirected to pipe)
-     #### full_path: NULL (because echo is a builtin)
-     #### full_cmd: {echo, hello there, how, are, you doing?, pixel, NULL}
-   ## cmd 2:
-     #### infile: 0 (contains output of previous command)
-     #### outfile: 3 (fd corresponding to the open file 'outfile')
-     #### full_path: /bin/wc
-     #### full_cmd: {wc, -l, NULL}
-# envp: (envp from main)
-# pid: process ID of current instance
-# g_status: 0 (if last command exits normally)
+
+/ cmds:
+   // cmd 1:
+     //// infile: 0 (default)
+     //// outfile: 1 (redirected to pipe)
+     //// full_path: NULL (because echo is a builtin)
+     //// full_cmd: {echo, hello there, how, are, you doing?, pixel, NULL}
+   // cmd 2:
+     //// infile: 0 (contains output of previous command)
+     //// outfile: 3 (fd corresponding to the open file 'outfile')
+     //// full_path: /bin/wc
+     //// full_cmd: {wc, -l, NULL}
+/ envp: (envp from main)
+/ pid: process ID of current instance
+/ g_status: 0 (if last command exits normally)
+
 +++++++++++++
 
 
