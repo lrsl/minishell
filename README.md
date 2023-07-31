@@ -77,9 +77,9 @@ Ce que ca donne avec la phrase d'exemple au dessus:
 
 +++++++++++++
 
-/ cmds:
-   // cmd 1:
-     //// infile: 0 (default)
+- cmds:
+  - cmd 1:
+   - infile: 0 (default)
      //// outfile: 1 (redirected to pipe)
      //// full_path: NULL (because echo is a builtin)
      //// full_cmd: {echo, hello there, how, are, you doing?, pixel, NULL}
