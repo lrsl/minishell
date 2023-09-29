@@ -100,3 +100,52 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	}
 	return (0);
 }
+
+char	*ft_strnstr(const char *big, const char *little, size_t len)
+{
+	size_t	i;
+	size_t	j;
+
+	if (little[0] == '\0')
+		return ((char *)big);
+	i = 0;
+	while (big[i] != '\0' && i < len)
+	{
+		if (big[i] == little[0])
+		{
+			j = 0;
+			while (little[j] != '\0' && j + i < len)
+			{
+				if (big[i + j] == little[j] && little[j + 1] == '\0')
+					return ((char *)&big[i]);
+				else if (big[i + j] != little[j])
+					break ;
+				j++;
+			}
+		}
+		i++;
+	}
+	return (NULL);
+}
+
+
+char	*ft_strtrim(char const *s1, char const *set)
+{
+	int	len;
+	int	i;
+	int	j;
+
+	if (!s1)
+		return (0);
+	len = ft_strlen(s1);
+	i = 0;
+	j = len - 1;
+	while (i <= len / 2 && ft_strchr(set, s1[i]) != NULL)
+		i++;
+	while (j >= len / 2 && ft_strchr(set, s1[j]) != NULL)
+		j--;
+	if (i > j)
+		return (ft_strdup(""));
+	len = j - i;
+	return (ft_substr(s1, i, len + 1));
+}

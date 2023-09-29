@@ -6,17 +6,18 @@ int	main(int ac, char **av, char **env)
 	char	*out;
 	t_big	big;
 
-	big = struct_init(av, env); **TODO** //Parsing pour remplir la structure
-	while(1)
+	big = struct_init(av, env); //Parsing pour remplir la structure
+	while(av && ac)
 	{
-		**TODO**
+		**TODO signals**
+		str = custom_prompt(big); //gerer le prompt
 		if (str)
 			out = readline(str);
 		else
 			out = readline("guest@minishell $ ");
 		free(str);
 		if (!args_verif(out, &big))
-			break;
+			break ;
 
 	}
 	exit(status_code);

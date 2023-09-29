@@ -55,7 +55,7 @@ void	*child_process(t_big *struct, t_list *command, int fd[2])
 	child_process_next(command, fd);
 	close(fd[READ_END]);
 	child_process_builtin(struct, node, len, command);
-	ft_lstclear(&struct->cmds, free_content);
+	ft_lstclear(&struct->commands, free_content);
 	exit(g_status);
 }
 
@@ -99,14 +99,14 @@ void	*forking_verif(t_big *struct, t_list *command, int fd[2])
 }
 
 
-
+//debut de la partie exec
 void	*main_exec(t_big *struct, t_list *command)
 {
 	int		fd[2];
 
 	access_command(struct, command, NULL, NULL);
 	if (pipe(fd) == -1)
-		return (error_function(PIPERR, NULL, 1));
+		return (error_function(PIPERR, NULL, 1)); //erreur de pipe donc function error qui correspond
 	if (!forking_verif(struct, command, fd))
 		return (NULL);
 	close(fd[WRITE_END]);
@@ -120,3 +120,4 @@ void	*main_exec(t_big *struct, t_list *command)
 		close(((t_little *)command->content)->outfile);
 	return (NULL);
 }
+

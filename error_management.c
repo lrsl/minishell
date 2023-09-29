@@ -32,8 +32,8 @@ free_function(void *data)
 	t_little	*node;
 
 	node = data;
-	ft_tabfree(&node->full_cmd);
-	free(node->full_path);
+	ft_tabfree(&node->command);
+	free(node->path);
 	if (node->infile != STDIN_FILENO)
 		close(node->infile);
 	if (node->outfile != STDOUT_FILENO)

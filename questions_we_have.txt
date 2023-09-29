@@ -1,0 +1,10 @@
+ajouter dirent.h pour la variable DIR ?
+
+ajouter la libft
+		atoi
+		itoa
+		get_next_line
+
+ajouter en haut des docs :
+		#include "minishell.h"
+		extern int	status_code;
