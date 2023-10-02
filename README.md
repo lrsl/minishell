@@ -110,3 +110,32 @@ En gros
 
 -------------------------
 -------------------------
+
+1. **args_verif** (le tout debut du parsing)
+	- si rien, alors "exit" puis break dans le main
+	- *trim1*, pour separer aux espaces et quotes
+		- *ft_wordcounting*, pour compter le nombre de mots en fonction des espaces et des quotes
+		- *put_in_tab*, pour remplir le tableau avec les substr
+	- si le moindre probleme, error + return
+	- *args_parsing*
+2. **args_parsing**
+
+	- 3. **final_split** (dans *put_in_nodes*, voir plus bas) : on expand les variables, on resplit et on remet tout dans tab
+		- *var_expanding*, si les conditions autour de la variable $ sont remplies (hors quotes par ex), on va expend la substring
+			- *substr_var_expanding*, pour remplacer $ dans str par sa valeur et reformer str autour
+		- *path_expanding*, pour expand ~ si les conditions sont remplies
+		- *trim2*, pour respliter en plus petit, prenant en compte les <, > et |
+		- *ft_tab_row_n_replace*, on actualise tab
+	- 4. **put_in_nodes**
+		- *dup_trim*, on va dup avec *ft_duptab* puis trim avec *quote_trim*
+
+		
+_____________________
+_____________________
+Point clef pour gérer les simples et doubles quotes :
+		quotes[0] = (quotes[0] + (!quotes[1] && str[i] == '\'')) % 2;
+		quotes[1] = (quotes[1] + (!quotes[0] && str[i] == '\"')) % 2;
+Explciation pour mon Tonio: La premiere ligne regarde si la position actuelle est une simple quote, et si on est pas deja dans des doubles quotes. Si tout va bien (oui c'est une simple quote qui n'est pas au milieu de double quotes), alors le status de "quotes[0]" est mis a jour : il devient 1 si c'est la premiere simple quote d'une paire, 0 si c'est la deuxieme de la pair (grace au modulo).
+Pareil pour la deuxienme ligne, mais pour les doubles quotes.
+_____________________
+_____________________

@@ -46,7 +46,7 @@ static DIR	*verif_cmd(t_big *struct, t_list *command, char ***s, char *path)
 	}
 	else if (!verif_builtin(node) && node && node->full_cmd && !dir)
 	{
-		path = mini_getenv("PATH", struct->envp, 4); //function a faire avec Antoine
+		path = find_env("PATH", struct->envp, 4); //function a faire avec Antoine
 		*s = ft_split(path, ':');
 		free(path);
 		node->full_path = verif_pathcommand(*s, *node->full_cmd, node->full_path);

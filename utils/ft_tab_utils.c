@@ -26,7 +26,7 @@ char	**ft_duptab(char **tab)
 		out[i] = ft_strdup(tab[i]);
 		if (!out[i])
 		{
-			ft_free_matrix(&out);
+			ft_tabfree(&out);
 			return (NULL);
 		}
 		i++;
@@ -36,8 +36,7 @@ char	**ft_duptab(char **tab)
 }
 
 
-//to add to libft, to free a nxn tab
-
+//to add to libft, to free a nxn tab, super utile dans plein de cas
 void	ft_tabfree(char ***tab)
 {
 	int	i;
@@ -83,3 +82,31 @@ char	**ft_biggertab(char **in, char *newstr)
 	ft_tabfree(&in);
 	return (out);
 }
+
+// pour remplacer le contenu de big a l'index par le contenu de new, et retourner big
+char	**ft_tab_row_n_replace(char ***big, char **new, int index)
+{
+	char	**aux;
+	int		i[3];
+
+	i[0] = -1;
+	i[1] = -1;
+	i[2] = -1;
+	if (!big || !*big || index < 0 || index >= ft_tablen(*big))
+		return (NULL);
+	aux = ft_calloc(ft_tablen(*big) + ft_tablen(new), sizeof(char *));
+	while (aux && big[0][++i[0]])
+	{
+		if (i[0] != index)
+			aux[++i[2]] = ft_strdup(big[0][i[0]]);
+		else
+		{
+			while (new && new[++i[1]])
+				aux[++i[2]] = ft_strdup(new[i[1]]);
+		}
+	}
+	ft_tabfree(big);
+	*big = aux;
+	return (*big);
+}
+

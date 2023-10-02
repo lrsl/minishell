@@ -1,42 +1,42 @@
 
-char	**split_all(char **args, t_big *big)
+// on expand les variables, on resplit et on remet tout dans tab
+char	**final_split(char **tab, t_big *big)
 {
 	char	**subsplit;
 	int		i;
 	int		quotes[2];
 
 	i = -1;
-	while (args && args[++i])
+	while (tab && tab[++i])
 	{
-		args[i] = expand_vars(args[i], -1, quotes, big);
-		args[i] = expand_path(args[i], -1, quotes, \
-			mini_getenv("HOME", big->env, 4));
-		subsplit = ft_cmdsubsplit(args[i], "<|>");
-		ft_matrix_replace_in(&args, subsplit, i);
-		i += ft_matrixlen(subsplit) - 1;
-		ft_free_matrix(&subsplit);
+		tab[i] = var_expanding(tab[i], -1, quotes, big); //expand les var $
+		tab[i] = path_expanding(tab[i], -1, quotes,	find_env("HOME", big->env, 4));
+		subsplit = trim2(tab[i], "<|>"); //on split encore avec <, > et |
+		ft_tab_row_n_replace(&tab, subsplit, i); //on actualise dans tab
+		i += ft_tablen(subsplit) - 1;
+		ft_tabfree(&subsplit);
 	}
-	return (args);
+	return (tab);
 }
 
-void	*args_parsing(char **args, t_big *big)
+void	*args_parsing(char **tab, t_big *big)
 {
-	int	is_exit;
+	int	trigger;
 	int	i;
 
-	is_exit = 0;
-	big->commands = fill_nodes(split_all(args, big), -1);
+	trigger = 0;
+	big->commands = put_in_nodes(final_split(tab, big), -1); //final_split : on resplit. put_in_nodes : on met les morceaux dans les structures s_little
 	if (!big->commands)
 		return (big);
 	i = ft_lstsize(big->commands);
-	status_code = builtin(big, big->commands, &is_exit, 0);
+	status_code = builtin(big, big->commands, &trigger, 0);
 	while (i-- > 0)
 		waitpid(-1, &status_code, 0);
-	if (!is_exit && status_code == 13)
+	if (!trigger && status_code == 13)
 		status_code = 0;
 	if (status_code > 255)
 		status_code = status_code / 255;
-	if (args && is_exit)
+	if (tab && trigger)
 	{
 		ft_lstclear(&big->commands, free_function);
 		return (NULL);
@@ -47,17 +47,17 @@ void	*args_parsing(char **args, t_big *big)
 //debut du parsing
 void	*args_verif(char *out, t_big *big)
 {
-	char	**tab;
+	char		**tab;
 	t_little	*node;
 
 	if (!out)
 	{
 		printf("exit\n");
-		return (NULL);
+		return (NULL); //donne lieu au break dans le main
 	}
 	if (out[0] != '\0')
-		add_history(out);
-	tab = ft_cmdtrim(out, " "); //triming
+		add_history(out); //sinon on ajoute a l'history
+	tab = trim1(out, " "); //first triming avec les spaces et les quotes
 	free(out);
 	if (!tab)
 		error_function(QUOTE, NULL, 1);

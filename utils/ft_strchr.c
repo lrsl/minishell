@@ -15,22 +15,38 @@ char	*ft_strchr(const char *str, int c)
 	return (NULL);
 }
 
-int	ft_strchr_n(const char *s, int c)
+int	ft_strchr_n(const char *str, int c)
 {
 	unsigned char	uns_c;
 	int				i;
 
 	i = 0;
-	if (!s)
+	if (!str)
 		return (-1);
 	uns_c = (unsigned char)c;
-	while (s[i] != '\0')
+	while (str[i] != '\0')
 	{
-		if (s[i] == uns_c)
+		if (str[i] == uns_c)
 			return (i);
 		i++;
 	}
 	if (uns_c == '\0')
 		return (i);
+	return (-1);
+}
+
+int	ft_strchr_str(const char *str, char *str2)
+{
+	int				i;
+
+	i = 0;
+	if (!str)
+		return (-1);
+	while (str[i] != '\0')
+	{
+		if (ft_strchr(str2, str[i]))
+			return (i);
+		i++;
+	}
 	return (-1);
 }

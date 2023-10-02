@@ -1,9 +1,12 @@
 ajouter dirent.h pour la variable DIR ?
 
-ajouter la libft
+ajouter la libft, notamment pour :
 		atoi
 		itoa
 		get_next_line
+		ft_lstnew
+		ft_lstlast
+		ft_lstadd_back
 
 ajouter en haut des docs :
 		#include "minishell.h"
