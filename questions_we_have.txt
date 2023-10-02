@@ -7,6 +7,7 @@ ajouter la libft, notamment pour :
 		ft_lstnew
 		ft_lstlast
 		ft_lstadd_back
+		ft_lstclear
 
 ajouter en haut des docs :
 		#include "minishell.h"

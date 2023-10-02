@@ -90,7 +90,7 @@ Ce que ca donne avec la phrase d'exemple au dessus:
 		- full_cmd: {wc, -l, NULL}
 -  envp: (envp from main)
 -  pid: process ID of current instance
--  g_status: 0 (if last command exits normally)
+-  status_code: 0 (if last command exits normally)
 
 +++++++++++++
 
@@ -128,8 +128,9 @@ En gros
 		- *ft_tab_row_n_replace*, on actualise tab
 	- 4. **put_in_nodes**
 		- *dup_trim*, on va dup avec *ft_duptab* puis trim avec *quote_trim*
+		- on cree une liste chainee de 'little', qu'on va remplir avec *adapt_to_param_type* pour checker/modifier les infile?outfile en fonction du type détecté, jusqu'a s'arreter qvec *filling_finished*
 
-		
+
 _____________________
 _____________________
 Point clef pour gérer les simples et doubles quotes :

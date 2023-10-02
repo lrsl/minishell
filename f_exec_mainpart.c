@@ -8,15 +8,15 @@ void	child_process_builtin(t_big *struct, t_little *node, int len, t_list *comma
 		execve(node->full_path, node->full_cmd, struct->envp);
 	else if (node->full_cmd && !ft_strncmp(*node->full_cmd, "pwd", len) \
 		&& len == 3)
-		g_status = // function oour choper le status exit code
+		status_code = // function oour choper le status exit code
 	else if (verif_builtin(node) && node->full_cmd && \
 		!ft_strncmp(*node->full_cmd, "echo", len) && len == 4)
-		g_status = // builtin echo a faire
+		status_code = // builtin echo a faire
 	else if (verif_builtin(node) && node->full_cmd && \
 		!ft_strncmp(*node->full_cmd, "env", len) && len == 3)
 	{
 		xxxx(struct->envp, 1, 1); //function pour le fd du tab, voir notes dans obsidian
-		g_status = 0;
+		status_code = 0;
 	}
 }
 
@@ -56,7 +56,7 @@ void	*child_process(t_big *struct, t_list *command, int fd[2])
 	close(fd[READ_END]);
 	child_process_builtin(struct, node, len, command);
 	ft_lstclear(&struct->commands, free_content);
-	exit(g_status);
+	exit(status_code);
 }
 
 void	forking_exec(t_big *struct, t_list *command, int fd[2])
@@ -90,9 +90,9 @@ void	*forking_verif(t_big *struct, t_list *command, int fd[2])
 		forking_exec(struct, command, fd);
 	else if (!verif_builtin(node) && ((node->full_path && \
 		!access(node->full_path, F_OK)) || dir))
-		g_status = 126;
+		status_code = 126;
 	else if (!verif_builtin(node) && node->full_cmd)
-		g_status = 127;
+		status_code = 127;
 	if (dir)
 		closedir(dir);
 	return ("");

@@ -26,12 +26,12 @@ void	*args_parsing(char **tab, t_big *big)
 
 	trigger = 0;
 	big->commands = put_in_nodes(final_split(tab, big), -1); //final_split : on resplit. put_in_nodes : on met les morceaux dans les structures s_little
-	if (!big->commands)
+	if (!big->commands) //si erreur on garde big unchanged
 		return (big);
-	i = ft_lstsize(big->commands);
-	status_code = builtin(big, big->commands, &trigger, 0);
-	while (i-- > 0)
-		waitpid(-1, &status_code, 0);
+	i = ft_lstsize(big->commands); //on calcule la taille de la liste créée
+	status_code = builtin(big, big->commands, &trigger, 0); //on appelle les builtins
+	while (i-- > 0) //tant que la liste chainée existe
+		waitpid(-1, &status_code, 0); //on attend le child process
 	if (!trigger && status_code == 13)
 		status_code = 0;
 	if (status_code > 255)

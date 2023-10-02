@@ -41,16 +41,8 @@ static char	*get_user(t_big big)
 		user = ft_biggertab(user, "guest");
 	if (!ft_strncmp(user[0], "root", 4))
 		data2 = ft_strjoin(NULL, RED);
-	else if ((int)(user[0][0]) % 5 == 0)
-		data2 = ft_strjoin(NULL, CYAN);
-	else if ((int)(user[0][0]) % 5 == 1)
-		data2 = ft_strjoin(NULL, GRAY);
-	else if ((int)(user[0][0]) % 5 == 2)
-		data2 = ft_strjoin(NULL, GREEN);
-	else if ((int)(user[0][0]) % 5 == 3)
-		data2 = ft_strjoin(NULL, MAGENTA);
 	else
-		data2 = ft_strjoin(NULL, YELLOW);
+		data2 = ft_strjoin(NULL, WHITE);
 	data1 = ft_strjoin(data2, *user);
 	free(data2);
 	ft_tabfree(&user);
@@ -70,7 +62,7 @@ char	*custom_prompt(t_big big)
 	data1 = ft_strjoin(data2, str); //on join le home en plus
 	free(str);
 	free(data2);
-	if (!g_status || g_status == -1) //on check le status
+	if (!status_code || status_code == -1) //on check le status
 		data2 = ft_strjoin(data1, BLUE); //blue
 	else
 		data2 = ft_strjoin(data1, RED); //red
