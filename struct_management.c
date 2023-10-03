@@ -33,12 +33,12 @@ void	ft_getpid(t_big *struct)
 	if (pid < 0)
 	{
 		error_function(FORKERR, NULL, 1);
-		ft_tabfree(&struct->envp);
+		ft_tabfree(&struct->env);
 		exit(1);
 	}
 	if (!pid)
 	{
-		ft_tabfree(&struct->envp);
+		ft_tabfree(&struct->env);
 		exit(1);
 	}
 	waitpid(pid, NULL, 0);

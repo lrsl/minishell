@@ -3,22 +3,22 @@ extern int	status_code;
 int	main(int ac, char **av, char **env)
 {
 	char	*str;
-	char	*out;
+	char	*displayed;
 	t_big	big;
 
 	big = struct_init(av, env); //Parsing pour remplir la structure
 	while(av && ac)
 	{
-		**TODO signals**
+		signal(SIGINT, signal_management);
+		signal(SIGQUIT, SIG_IGN);
 		str = custom_prompt(big); //gerer le prompt
 		if (str)
-			out = readline(str);
+			displayed = readline(str);
 		else
-			out = readline("guest@minishell $ ");
+			displayed = readline("guest@minishell $ ");
 		free(str);
-		if (!args_verif(out, &big))
+		if (!args_verif(displayed, &big))
 			break ;
-
 	}
 	exit(status_code);
 }

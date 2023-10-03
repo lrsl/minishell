@@ -71,7 +71,7 @@ En gros : une "BIG" structure qui contient les infos generales mais aussi une li
 - iterer sur tout le tableau cree par l'expander
 - quand il y a une redirection, regarde le fd associe et verifie que tout est valide/open
 - quand il y a un pipe, il va creer un nouveau node ("SMALL" struct pour chaue commande)
-- dans tous les cas va stocker tout ce qu'il y a dans une variable de "SMALL STRUCT" (la variable appelee "full_cmd" dans le screenshot)
+- dans tous les cas va stocker tout ce qu'il y a dans une variable de "SMALL STRUCT" (la variable appelee "command" dans le screenshot)
 
 Ce que ca donne avec la phrase d'exemple au dessus:
 
@@ -81,14 +81,14 @@ Ce que ca donne avec la phrase d'exemple au dessus:
 	- cmd 1:
 		- infile: 0 (default)
 		- outfile: 1 (redirected to pipe)
-		- full_path: NULL (because echo is a builtin)
-		- full_cmd: {echo, hello there, how, are, you doing?, pixel, NULL}
+		- path: NULL (because echo is a builtin)
+		- command: {echo, hello there, how, are, you doing?, pixel, NULL}
 	- cmd 2:
 		- infile: 0 (contains output of previous command)
 		- outfile: 3 (fd corresponding to the open file 'outfile')
-		- full_path: /bin/wc
-		- full_cmd: {wc, -l, NULL}
--  envp: (envp from main)
+		- path: /bin/wc
+		- command: {wc, -l, NULL}
+-  env: (env from main)
 -  pid: process ID of current instance
 -  status_code: 0 (if last command exits normally)
 

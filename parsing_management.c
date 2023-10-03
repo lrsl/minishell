@@ -63,7 +63,7 @@ void	*args_verif(char *out, t_big *big)
 		error_function(QUOTE, NULL, 1);
 	if (!tab)
 		return ("");
-	big = args_parsing(tab, big);
+	big = args_parsing(tab, big); //gros du parsing
 	if (big && big->commands)
 		node = big->commands->content;
 	if (big && big->commands && node && node->command && ft_lstsize(big->commands) == 1)

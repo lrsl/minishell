@@ -3,19 +3,20 @@
 
 void	child_process_builtin(t_big *struct, t_little *node, int len, t_list *command)
 {
-	signal(); //finir de voir ensemble si ok ? necessaire ?
-	if (!verif_builtin(node) && node->full_cmd)
-		execve(node->full_path, node->full_cmd, struct->envp);
-	else if (node->full_cmd && !ft_strncmp(*node->full_cmd, "pwd", len) \
+	signal(SIGINT, SIG_DFL);
+	signal(SIGQUIT, SIG_DFL);
+	if (!verif_builtin(node) && node->command)
+		execve(node->path, node->command, struct->env);
+	else if (node->command && !ft_strncmp(*node->command, "pwd", len) \
 		&& len == 3)
-		status_code = // function oour choper le status exit code
-	else if (verif_builtin(node) && node->full_cmd && \
-		!ft_strncmp(*node->full_cmd, "echo", len) && len == 4)
-		status_code = // builtin echo a faire
-	else if (verif_builtin(node) && node->full_cmd && \
-		!ft_strncmp(*node->full_cmd, "env", len) && len == 3)
+		status_code =  recoded_builtin_pwd();// function oour choper le status exit code et le pwd
+	else if (verif_builtin(node) && node->command && \
+		!ft_strncmp(*node->command, "echo", len) && len == 4)
+		status_code = recoded_builtin_echo(cmd);// builtin echo a faire
+	else if (verif_builtin(node) && node->command && \
+		!ft_strncmp(*node->command, "env", len) && len == 3)
 	{
-		xxxx(struct->envp, 1, 1); //function pour le fd du tab, voir notes dans obsidian
+		ft_putmatrix_fd(prompt->envp, 1, 1); //cf questions TO DO
 		status_code = 0;
 	}
 }
@@ -50,8 +51,8 @@ void	*child_process(t_big *struct, t_list *command, int fd[2])
 
 	node = command->content;
 	len = 0;
-	if (node->full_cmd)
-		len = ft_strlen(*node->full_cmd);
+	if (node->command)
+		len = ft_strlen(*node->command);
 	child_process_next(command, fd);
 	close(fd[READ_END]);
 	child_process_builtin(struct, node, len, command);
@@ -82,16 +83,16 @@ void	*forking_verif(t_big *struct, t_list *command, int fd[2])
 
 	node = command->content;
 	dir = NULL;
-	if (node->full_cmd)
-		dir = opendir(*node->full_cmd);
+	if (node->command)
+		dir = opendir(*node->command);
 	if (node->infile == -1 || node->outfile == -1)
 		return (NULL);
-	if ((node->full_path && access(node->full_path, X_OK) == 0) || verif_builtin(node))
+	if ((node->path && access(node->path, X_OK) == 0) || verif_builtin(node))
 		forking_exec(struct, command, fd);
-	else if (!verif_builtin(node) && ((node->full_path && \
-		!access(node->full_path, F_OK)) || dir))
+	else if (!verif_builtin(node) && ((node->path && \
+		!access(node->path, F_OK)) || dir))
 		status_code = 126;
-	else if (!verif_builtin(node) && node->full_cmd)
+	else if (!verif_builtin(node) && node->command)
 		status_code = 127;
 	if (dir)
 		closedir(dir);
