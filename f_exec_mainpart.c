@@ -16,7 +16,7 @@ void	child_process_builtin(t_big *struct, t_little *node, int len, t_list *comma
 	else if (verif_builtin(node) && node->command && \
 		!ft_strncmp(*node->command, "env", len) && len == 3)
 	{
-		ft_putmatrix_fd(prompt->envp, 1, 1); //cf questions TO DO
+		ft_puttab_fd(struct->env, 1, 1);
 		status_code = 0;
 	}
 }

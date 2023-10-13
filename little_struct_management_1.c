@@ -60,9 +60,9 @@ static char	**dup_trim(char **tab_of_args)
 }
 
 // mettre fin a la liste chainée
-static t_list	*filling_finished(t_list *cmds, char **args, char **temp)
+static t_list	*filling_finished(t_list *commands, char **args, char **temp)
 {
-	ft_lstclear(&cmds, free_content);
+	ft_lstclear(&commands, free_content);
 	ft_tabfree(&temp);
 	ft_tabfree(&args);
 	return (NULL);
@@ -71,29 +71,29 @@ static t_list	*filling_finished(t_list *cmds, char **args, char **temp)
 // prend un tabvleau d'arguments, le trim, puis cree une liste chainee de little, remplie des arguments selon leur type
 t_list	*put_in_nodes(char **tab_of_args, int i)
 {
-	t_list	*cmds[2];
+	t_list	*commands[2];
 	char	**temp[2];
 
-	cmds[0] = NULL;
+	commands[0] = NULL;
 	temp[1] = dup_trim(tab_of_args);
 	while (tab_of_args[++i])
 	{
-		cmds[1] = ft_lstlast(cmds[0]); // on crée la liste chainée de 'little'
+		commands[1] = ft_lstlast(commands[0]); // on crée la liste chainée de 'little'
 		if (i == 0 || (tab_of_args[i][0] == '|' && tab_of_args[i + 1] && tab_of_args[i + 1][0]))
 		{
 			i += tab_of_args[i][0] == '|';
-			ft_lstadd_back(&cmds[0], ft_lstnew(prepare_little()));
-			cmds[1] = ft_lstlast(cmds[0]);
+			ft_lstadd_back(&commands[0], ft_lstnew(prepare_little()));
+			commands[1] = ft_lstlast(commands[0]);
 		}
 		temp[0] = tab_of_args;
-		cmds[1]->content = adapt_to_param_type(cmds[1]->content, temp, &i); //on va remplir en fonction du type de param
+		commands[1]->content = adapt_to_param_type(commands[1]->content, temp, &i); //on va remplir en fonction du type de param
 		if (i < 0)
-			return (filling_finished(cmds[0], tab_of_args, temp[1]));
+			return (filling_finished(commands[0], tab_of_args, temp[1]));
 		if (!tab_of_args[i])
 			break ;
 	}
 	ft_tabfree(&temp[1]);
 	ft_tabfree(&tab_of_args);
-	return (cmds[0]);
+	return (commands[0]);
 }
 

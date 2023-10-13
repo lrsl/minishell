@@ -8,6 +8,8 @@ ajouter la libft, notamment pour :
 		ft_lstlast
 		ft_lstadd_back
 		ft_lstclear
+		ft_putstr_fd
+		ft_putchar_fd
 
 ajouter en haut des docs :
 		#include "minishell.h"
@@ -17,7 +19,7 @@ ajouter en haut des docs :
 ON DOING
 
 1. ajouter dans les utils, + toutes les dependances, adapter nom
-			int	ft_putmatrix_fd(char **m, int nl, int fd)
+			int	ft_puttab_fd(char **m, int nl, int fd)
 			{
 				int	i;
 				int	count;

@@ -1,12 +1,12 @@
 
-int	recoded_builtin_cd(t_big *p)
+int	recoded_builtin_cd(t_big *big)
 {
 	char	**str[2];
 	char	*aux;
 
 	status_code = 0;
-	str[0] = ((t_little *)p->cmds->content)->command;
-	aux = mini_getenv("HOME", p->env, 4);
+	str[0] = ((t_little *)big->commands->content)->command;
+	aux = mini_getenv("HOME", big->env, 4);
 	if (!aux)
 		aux = ft_strdup("");
 	str[1] = ft_extend_matrix(NULL, aux);
@@ -16,13 +16,13 @@ int	recoded_builtin_cd(t_big *p)
 	free(aux);
 	cd_error(str);
 	if (!status_code)
-		p->env = mini_setenv("OLDPWD", str[1][1], p->env, 6);
+		big->env = mini_setenv("OLDPWD", str[1][1], big->env, 6);
 	aux = getcwd(NULL, 0);
 	if (!aux)
 		aux = ft_strdup("");
 	str[1] = ft_extend_matrix(str[1], aux);
 	free(aux);
-	p->env = mini_setenv("PWD", str[1][2], p->env, 3);
+	big->env = mini_setenv("PWD", str[1][2], big->env, 3);
 	ft_free_matrix(&str[1]);
 	return (status_code);
 }
@@ -72,7 +72,7 @@ int	recoded_builtin_export(t_big *big)
 	int		pos;
 	char	**argv;
 
-	argv = ((t_little *)big->cmds->content)->command;
+	argv = ((t_little *)big->commands->content)->command;
 	if (ft_matrixlen(argv) >= 2)
 	{
 		ij[0] = 1;
@@ -99,7 +99,7 @@ int	recoded_builtin_unset(t_big *big)
 	int		ij[2];
 
 	ij[0] = 0;
-	argv = ((t_little *)big->cmds->content)->command;
+	argv = ((t_little *)big->commands->content)->command;
 	if (ft_matrixlen(argv) >= 2)
 	{
 		while (argv[++ij[0]])
