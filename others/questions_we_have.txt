@@ -1,0 +1,43 @@
+ajouter dirent.h pour la variable DIR ?
+
+ajouter la libft, notamment pour :
+		atoi
+		itoa
+		get_next_line
+		ft_lstnew
+		ft_lstlast
+		ft_lstadd_back
+		ft_lstclear
+		ft_putstr_fd
+		ft_putchar_fd
+
+ajouter en haut des docs :
+		#include "minishell.h"
+		extern int	status_code;
+
+
+ON DOING
+
+1. ajouter dans les utils, + toutes les dependances, adapter nom
+			int	ft_puttab_fd(char **m, int nl, int fd)
+			{
+				int	i;
+				int	count;
+
+				count = 0;
+				i = 0;
+				while (m && m[i])
+				{
+					if (nl)
+						count += ft_putendl_fd(m[i], fd);
+					else
+						count += ft_putstr_fd(m[i], fd);
+					i++;
+				}
+				return (count);
+			}
+
+2. finir exec main part file
+
+3. trouver et adapter builtin ENV 
+

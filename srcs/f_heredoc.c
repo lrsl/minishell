@@ -1,0 +1,1 @@
+//gestion du heredoc (reprendre celui de pipex)
