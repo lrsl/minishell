@@ -6,7 +6,7 @@
 /*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:54:46 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/18 12:04:08 by rroussel         ###   ########.fr       */
+/*   Updated: 2023/10/18 12:33:12 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,8 @@ void	signal_management(int signal)
 }
 
 
-// void rl_replace_line (const char *text, int clear_undo)
+// void rl_replace_line (const char *text, int clear_undo) ---> CF SUBJECT
 // Replace the contents of rl_line_buffer with text. The point and mark are preserved, if possible. If clear_undo is non-zero, the undo list associated with the current line is cleared.
 
-// int rl_on_new_line ()
+// int rl_on_new_line () ---> CF SUBJECT
 // Tell the update routines that we have moved onto a new (empty) line, usually after ouputting a newline.
-
-// TO DO

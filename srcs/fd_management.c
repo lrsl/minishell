@@ -6,7 +6,7 @@
 /*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:55:27 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/18 12:03:27 by rroussel         ###   ########.fr       */
+/*   Updated: 2023/10/18 12:35:59 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ t_little	*manage_infile_2(t_little *node, char **args, int *i)
 	if (args[++(*i)])
 	{
 		aux[0] = args[*i];
-		node->infile = get_here_doc(str, aux);
+		node->infile = ft_here_doc(str, aux);
 	}
 	if (!args[*i] || node->infile == -1)
 	{

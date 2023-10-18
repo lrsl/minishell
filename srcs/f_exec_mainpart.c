@@ -6,7 +6,7 @@
 /*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:55:48 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/18 12:12:59 by rroussel         ###   ########.fr       */
+/*   Updated: 2023/10/18 12:30:33 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ extern int	status_code;
 // execution de minishell
 
 
-void	child_process_builtin(t_big *bigstruct, t_little *node, int len, t_list *command)
+void	child_process_builtin(t_big *bigstruct, t_little *node, int len, t_list *cmd)
 {
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
