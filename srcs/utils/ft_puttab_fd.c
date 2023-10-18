@@ -6,11 +6,11 @@
 /*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:53:49 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/18 11:53:50 by rroussel         ###   ########.fr       */
+/*   Updated: 2023/10/18 13:17:51 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../include/minishell.h"
 
 size_t	ft_strlen_static(const char *s)
 {

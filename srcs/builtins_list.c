@@ -6,11 +6,11 @@
 /*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:54:22 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/18 12:01:54 by rroussel         ###   ########.fr       */
+/*   Updated: 2023/10/18 13:19:00 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../include/minishell.h"
 
 extern int	status_code;
 
@@ -93,7 +93,7 @@ int	recoded_builtin_export(t_big *big)
 		ij[0] = 1;
 		while (argv[ij[0]])
 		{
-			pos = var_in_envp(argv[ij[0]], big->env, ij);
+			pos = var_env(argv[ij[0]], big->env, ij);
 			if (pos == 1)
 			{
 				free(big->env[ij[1]]);
@@ -125,7 +125,7 @@ int	recoded_builtin_unset(t_big *big)
 				free(argv[ij[0]]);
 				argv[ij[0]] = aux;
 			}
-			if (var_in_envp(argv[ij[0]], big->env, ij))
+			if (var_env(argv[ij[0]], big->env, ij))
 				ft_tab_row_n_replace(&big->env, NULL, ij[1]);
 		}
 	}

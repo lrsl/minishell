@@ -6,11 +6,11 @@
 /*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:55:23 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/18 11:55:25 by rroussel         ###   ########.fr       */
+/*   Updated: 2023/10/18 13:19:21 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../include/minishell.h"
 
 // on reinitialise chaque node avant de le remplir
 static t_little	*prepare_little(void)
@@ -75,7 +75,7 @@ static char	**dup_trim(char **tab_of_args)
 // mettre fin a la liste chainée
 static t_list	*filling_finished(t_list *commands, char **args, char **temp)
 {
-	ft_lstclear(&commands, free_content);
+	ft_lstclear(&commands, free_function);
 	ft_tabfree(&temp);
 	ft_tabfree(&args);
 	return (NULL);

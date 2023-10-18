@@ -6,11 +6,11 @@
 /*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:53:23 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/18 11:53:25 by rroussel         ###   ########.fr       */
+/*   Updated: 2023/10/18 13:17:39 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../include/minishell.h"
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {

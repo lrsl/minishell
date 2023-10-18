@@ -6,11 +6,11 @@
 /*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:54:39 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/18 12:12:59 by rroussel         ###   ########.fr       */
+/*   Updated: 2023/10/18 13:19:07 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../include/minishell.h"
 
 extern int	status_code;
 
@@ -22,7 +22,7 @@ t_big	fill_struct(t_big bigstruct, char *str, char **av)
 	str = getcwd(NULL, 0); //on chope le cwd
 	bigstruct.env = do_env("PWD", str, bigstruct.env, 3); //trouver le bon pwd
 	free(str);
-	str = find_env("SHLVL", bigstruct.env, 5) //recup SHLVL
+	str = find_env("SHLVL", bigstruct.env, 5); //recup SHLVL
 	if (!str || ft_atoi(str) <= 0)
 		nb = ft_strdup("1");
 	else

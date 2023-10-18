@@ -5,11 +5,22 @@
 # define READ_END 0
 # define WRITE_END 1
 
+# define DEFAULT "\001\033[0;39m\002"
+# define RED "\001\033[1;91m\002"
+# define GREEN "\001\033[1;92m\002"
+# define BLUE "\001\033[1;94m\002"
+# define WHITE "\001\033[0;97m\002"
+
 # include <stddef.h>
 # include <stdlib.h>
 # include <signal.h>
 # include <dirent.h>
 # include <unistd.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include <sys/wait.h>
+# include <sys/ioctl.h>
 
 typedef struct s_list
 {
@@ -58,6 +69,10 @@ void			ft_lstadd_back(t_list **lst, t_list *newnode);
 
 int				ft_putstr_fd_newline(char *s, int fd);
 
+void			*ft_memset(void *str, int c, size_t n);
+void			*ft_calloc(size_t nb, size_t size);
+
+
 size_t			ft_strlen_static(const char *s);
 int				ft_putchar_fd(char c, int fd);
 int				ft_putstr_fd(char *s, int fd);
@@ -75,6 +90,7 @@ char			*ft_substr(char const *s, unsigned int start, size_t len);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 char			*ft_strnstr(const char *big, const char *little, size_t len);
 char			*ft_strtrim(char const *s1, char const *set);
+int				ft_countchar(char *str, char c);
 
 char			*ft_strchr(const char *str, int c);
 int				ft_strchr_n(const char *str, int c);
@@ -100,6 +116,7 @@ int				recoded_builtin_unset(t_big *big);
 int				builtin(t_big *big, t_list *cmd, int *is_exit, int n);
 int				verif_builtin(t_little *node);
 
+static int		var_env(char *av, char **env, int tab[2]);
 char			*find_env(char *var, char **env, int n);
 char			**do_env(char *str, char *value, char **env, int n);
 
@@ -146,6 +163,9 @@ void			*args_verif(char *out, t_big *big);
 static char		*get_home(t_big big);
 static char		*get_user(t_big big);
 char			*custom_prompt(t_big big);
+
+int				ft_here_doc(char *str[2], char *aux[2]);
+char			*ft_here_doc_str(char *str[2], size_t len, char *limit, char *trigger);
 
 void			signal_management(int signal);
 

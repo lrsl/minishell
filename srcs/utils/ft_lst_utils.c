@@ -6,11 +6,11 @@
 /*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:50:33 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/18 11:53:02 by rroussel         ###   ########.fr       */
+/*   Updated: 2023/10/18 13:17:58 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../include/minishell.h"
 
 int	ft_lstsize(t_list *lst)
 {

@@ -21,11 +21,12 @@ SRC =    srcs/builtins_list.c \
 	srcs/utils/ft_split.c \
 	srcs/utils/ft_str_utils.c \
 	srcs/utils/ft_strchr.c \
-	srcs/utils/gt_strjoin.c \
+	srcs/utils/ft_strjoin.c \
 	srcs/utils/ft_tab_utils.c \
 	srcs/utils/ft_user_utils.c \
 	srcs/utils/ft_itoa.c \
 	srcs/utils/ft_atoi.c \
+	srcs/utils/ft_malloc.c \
 
 OBJ = $(SRC:.c=.o)
 

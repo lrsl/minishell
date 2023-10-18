@@ -6,23 +6,23 @@
 /*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:53:35 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/18 11:53:37 by rroussel         ###   ########.fr       */
+/*   Updated: 2023/10/18 13:17:46 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../include/minishell.h"
 
-size_t	ft_strlen(const char *s)
+size_t	ft_strlen(const char *str)
 {
 	int	count;
 
 	count = 0;
-	if (!s)
+	if (!str)
 		return (count);
-	while (*s != '\0')
+	while (*str != '\0')
 	{
 		count++;
-		s++;
+		str++;
 	}
 	return (count);
 }
@@ -69,15 +69,15 @@ char	*ft_strdup(const char *s1)
 	return (d);
 }
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *str, unsigned int start, size_t len)
 {
 	size_t	s_len;
 	char	*substr;
 	size_t	i;
 
-	if (!s)
+	if (!str)
 		return (NULL);
-	s_len = ft_strlen(s);
+	s_len = ft_strlen(str);
 	i = 0;
 	if (len > s_len)
 		len = s_len;
@@ -93,8 +93,8 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (substr == NULL)
 		return (NULL);
 	while (i++ < start)
-		s++;
-	ft_strlcpy(substr, s, len + 1);
+		str++;
+	ft_strlcpy(substr, str, len + 1);
 	return (substr);
 }
 
@@ -161,4 +161,20 @@ char	*ft_strtrim(char const *s1, char const *set)
 		return (ft_strdup(""));
 	len = j - i;
 	return (ft_substr(s1, i, len + 1));
+}
+
+int	ft_countchar(char *str, char c)
+{
+	int	count;
+
+	if (!str)
+		return (0);
+	count = 0;
+	while (*str)
+	{
+		if (*str == c)
+			count++;
+		str++;
+	}
+	return (count);
 }

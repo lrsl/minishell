@@ -6,11 +6,11 @@
 /*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:53:13 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/18 11:53:16 by rroussel         ###   ########.fr       */
+/*   Updated: 2023/10/18 13:17:36 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../include/minishell.h"
 
 int	ft_tablen(char **tab)
 {

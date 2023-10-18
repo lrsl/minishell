@@ -6,11 +6,11 @@
 /*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:51:10 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/18 11:52:53 by rroussel         ###   ########.fr       */
+/*   Updated: 2023/10/18 13:17:32 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../include/minishell.h"
 
 static void	new_out(char ***out, int fd)
 {

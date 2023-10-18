@@ -6,13 +6,30 @@
 /*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:56:10 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/18 11:56:17 by rroussel         ###   ########.fr       */
+/*   Updated: 2023/10/18 13:19:37 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../include/minishell.h"
 
 // gestion de l'env
+
+static int	var_env(char *av, char **env, int tab[2])
+{
+	int	position;
+
+	tab[1] = 0;
+	position = ft_strchr_n(av, '=');
+	if (position == -1)
+		return (-1);
+	while (env[tab[1]])
+	{
+		if (!ft_strncmp(env[tab[1]], av, position + 1))
+			return (1);
+		tab[1]++;
+	}
+	return (0);
+}
 
 char	*find_env(char *var, char **env, int n)
 {

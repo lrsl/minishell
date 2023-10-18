@@ -6,11 +6,11 @@
 /*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:56:33 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/18 12:02:34 by rroussel         ###   ########.fr       */
+/*   Updated: 2023/10/18 13:19:38 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../include/minishell.h"
 
 extern int	status_code;
 

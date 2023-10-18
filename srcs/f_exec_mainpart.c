@@ -6,11 +6,11 @@
 /*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:55:48 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/18 12:30:33 by rroussel         ###   ########.fr       */
+/*   Updated: 2023/10/18 13:19:29 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../include/minishell.h"
 
 extern int	status_code;
 
@@ -72,7 +72,7 @@ void	*child_process(t_big *bigstruct, t_list *command, int fd[2])
 	child_process_next(command, fd);
 	close(fd[READ_END]);
 	child_process_builtin(bigstruct, node, len, command);
-	ft_lstclear(&bigstruct->commands, free_content);
+	ft_lstclear(&bigstruct->commands, free_function);
 	exit(status_code);
 }
 

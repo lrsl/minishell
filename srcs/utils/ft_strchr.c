@@ -6,11 +6,11 @@
 /*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:53:28 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/18 11:53:31 by rroussel         ###   ########.fr       */
+/*   Updated: 2023/10/18 13:17:41 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../../include/minishell.h"
 
 char	*ft_strchr(const char *str, int c)
 {

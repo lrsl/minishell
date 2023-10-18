@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anmassy <anmassy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:56:22 by anmassy           #+#    #+#             */
-/*   Updated: 2023/10/18 11:57:19 by anmassy          ###   ########.fr       */
+/*   Updated: 2023/10/18 13:16:35 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell"
+#include "../../include/minishell.h"
 
 int	ft_atoi(const char *nptr)
 {

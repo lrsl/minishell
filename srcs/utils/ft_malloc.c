@@ -1,25 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd_newline.c                             :+:      :+:    :+:   */
+/*   ft_malloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/18 11:53:05 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/18 13:17:54 by rroussel         ###   ########.fr       */
+/*   Created: 2023/10/18 13:13:41 by rroussel          #+#    #+#             */
+/*   Updated: 2023/10/18 13:17:56 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-int	ft_putstr_fd_newline(char *s, int fd)
+void	*ft_memset(void *str, int c, size_t n)
 {
-	if (s != NULL)
+	size_t	i;
+	char	*ptr;
+
+	ptr = (char *)str;
+	i = 0;
+	while (i < n)
 	{
-		ft_putstr_fd(s, fd);
-		ft_putchar_fd('\n', fd);
-		return ((int)ft_strlen(s) + 1);
+		*ptr = (unsigned char)c;
+		ptr++;
+		i++;
 	}
-	return (0);
+	return (str);
 }
 
+void	*ft_calloc(size_t nb, size_t size)
+{
+	char	*str;
+
+	if (nb <= 0 || size <= 0)
+		str = (char *)malloc(1);
+	else
+		str = (char *)malloc(nb * size);
+	if (!str)
+		return (NULL);
+	return (ft_memset(str, 0, nb * size));
+}
