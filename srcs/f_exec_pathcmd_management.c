@@ -6,7 +6,7 @@
 /*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:55:42 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/18 11:55:45 by rroussel         ###   ########.fr       */
+/*   Updated: 2023/10/18 12:12:59 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static char	*verif_pathcommand(char **env_path, char *command, char *path)
 	return (path);
 }
 
-static DIR	*verif_cmd(t_big *struct, t_list *command, char ***s, char *path)
+static DIR	*verif_cmd(t_big *bigstruct, t_list *command, char ***s, char *path)
 {
 	t_little	*node;
 	DIR		*dir;
@@ -60,7 +60,7 @@ static DIR	*verif_cmd(t_big *struct, t_list *command, char ***s, char *path)
 	}
 	else if (!verif_builtin(node) && node && node->command && !dir)
 	{
-		path = find_env("PATH", struct->env, 4); //function a faire avec Antoine
+		path = find_env("PATH", bigstruct->env, 4); //function a faire avec Antoine
 		*s = ft_split(path, ':');
 		free(path);
 		node->path = verif_pathcommand(*s, *node->command, node->path);
@@ -70,13 +70,13 @@ static DIR	*verif_cmd(t_big *struct, t_list *command, char ***s, char *path)
 	return (dir);
 }
 
-void	access_command(t_big *struct, t_list *command, char **s, char *path)
+void	access_command(t_big *bigstruct, t_list *command, char **s, char *path)
 {
 	t_little	*node;
 	DIR		*dir;
 
 	node = command->content;
-	dir = verif_cmd(struct, command, &s, path);
+	dir = verif_cmd(bigstruct, command, &s, path);
 	if (!verif_builtin(node) && node && node->command && dir)
 		error_function(IS_DIR, *node->command, 126);
 	else if (!verif_builtin(node) && node && node->path && \

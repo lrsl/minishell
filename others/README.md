@@ -49,7 +49,7 @@ string: echo "hello      there" how are 'you 'doing? $USER |wc -l >outfile
 trim1: {echo, "hello      there", how, are, 'you 'doing?, $USER, |wc, -l, >outfile, NULL}
 trim2: {echo, "hello      there", how, are, 'you 'doing?, pixel, |, wc, -l, >, outfile, NULL}
 
-On lit le struct, et on divise en utilisant 2 fonctions de trim, pour separer chaque element.
+On lit le bigstruct, et on divise en utilisant 2 fonctions de trim, pour separer chaque element.
 --> nous donne un tableau a 2 dimensions!
 
 
@@ -70,7 +70,7 @@ En gros : une "BIG" structure qui contient les infos generales mais aussi une li
 #Les etapes:
 - iterer sur tout le tableau cree par l'expander
 - quand il y a une redirection, regarde le fd associe et verifie que tout est valide/open
-- quand il y a un pipe, il va creer un nouveau node ("SMALL" struct pour chaue commande)
+- quand il y a un pipe, il va creer un nouveau node ("SMALL" bigstruct pour chaue commande)
 - dans tous les cas va stocker tout ce qu'il y a dans une variable de "SMALL STRUCT" (la variable appelee "command" dans le screenshot)
 
 Ce que ca donne avec la phrase d'exemple au dessus:
@@ -106,7 +106,7 @@ En gros
 - j'utilise des processes child pour lancer soit des commandes builtin ou des commandes reelles
 - je redirige stdin/stdout
 - si j'ai un full path c'est super je lance avec exec, sinon je prends le relative path et je cree le full path en utilisant l'environment
-- je gere les status exit des commandes et quand elles ont toutes fini, je lance un nouveau struct pres a recevoir une nouvelle commande!
+- je gere les status exit des commandes et quand elles ont toutes fini, je lance un nouveau bigstruct pres a recevoir une nouvelle commande!
 
 -------------------------
 -------------------------

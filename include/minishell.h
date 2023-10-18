@@ -111,16 +111,16 @@ char	*path_expanding(char *str, int i, int quotes[2], char *var);
 static char	*substr_var_expanding(char *str, int i, t_big *big);
 char	*var_expanding(char *str, int i, int quotes[2], t_big *big);
 
-void	child_process_builtin(t_big *struct, t_little *node, int len, t_list *command);
+void	child_process_builtin(t_big *bigstruct, t_little *node, int len, t_list *command);
 static void	*child_process_next(t_list *command, int fd[2]);
-void	*child_process(t_big *struct, t_list *command, int fd[2]);
-void	forking_exec(t_big *struct, t_list *command, int fd[2]);
-void	*forking_verif(t_big *struct, t_list *command, int fd[2]);
-void	*main_exec(t_big *struct, t_list *command);
+void	*child_process(t_big *bigstruct, t_list *command, int fd[2]);
+void	forking_exec(t_big *bigstruct, t_list *command, int fd[2]);
+void	*forking_verif(t_big *bigstruct, t_list *command, int fd[2]);
+void	*main_exec(t_big *bigstruct, t_list *command);
 
 static char	*verif_pathcommand(char **env_path, char *command, char *path);
-static DIR	*verif_cmd(t_big *struct, t_list *command, char ***s, char *path);
-void	access_command(t_big *struct, t_list *command, char **s, char *path);
+static DIR	*verif_cmd(t_big *bigstruct, t_list *command, char ***s, char *path);
+void	access_command(t_big *bigstruct, t_list *command, char **s, char *path);
 
 int	get_fd(int oldfd, char *path, int flags[2]);
 t_little	*manage_outfile_1(t_little *node, char **args, int *i);
@@ -149,8 +149,8 @@ char	*custom_prompt(t_big big);
 
 void	signal_management(int signal);
 
-t_big	fill_struct(t_big struct, char *str, char **av);
-void	ft_getpid(t_big *struct);
+t_big	fill_struct(t_big bigstruct, char *str, char **av);
+void	ft_getpid(t_big *bigstruct);
 t_big	struct_init(char **av, char **env);
 
 static int	ft_wordcounting(const char *str, char *target, int count[2]);

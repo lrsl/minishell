@@ -6,7 +6,7 @@
 /*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:55:48 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/18 12:03:14 by rroussel         ###   ########.fr       */
+/*   Updated: 2023/10/18 12:12:59 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ extern int	status_code;
 // execution de minishell
 
 
-void	child_process_builtin(t_big *struct, t_little *node, int len, t_list *command)
+void	child_process_builtin(t_big *bigstruct, t_little *node, int len, t_list *command)
 {
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
 	if (!verif_builtin(node) && node->command)
-		execve(node->path, node->command, struct->env);
+		execve(node->path, node->command, bigstruct->env);
 	else if (node->command && !ft_strncmp(*node->command, "pwd", len) \
 		&& len == 3)
 		status_code =  recoded_builtin_pwd();// function oour choper le status exit code et le pwd
@@ -32,7 +32,7 @@ void	child_process_builtin(t_big *struct, t_little *node, int len, t_list *comma
 	else if (verif_builtin(node) && node->command && \
 		!ft_strncmp(*node->command, "env", len) && len == 3)
 	{
-		ft_puttab_fd(struct->env, 1, 1);
+		ft_puttab_fd(bigstruct->env, 1, 1);
 		status_code = 0;
 	}
 }
@@ -60,7 +60,7 @@ static void	*child_process_next(t_list *command, int fd[2])
 	return ("");
 }
 
-void	*child_process(t_big *struct, t_list *command, int fd[2])
+void	*child_process(t_big *bigstruct, t_list *command, int fd[2])
 {
 	t_little	*node;
 	int		len;
@@ -71,12 +71,12 @@ void	*child_process(t_big *struct, t_list *command, int fd[2])
 		len = ft_strlen(*node->command);
 	child_process_next(command, fd);
 	close(fd[READ_END]);
-	child_process_builtin(struct, node, len, command);
-	ft_lstclear(&struct->commands, free_content);
+	child_process_builtin(bigstruct, node, len, command);
+	ft_lstclear(&bigstruct->commands, free_content);
 	exit(status_code);
 }
 
-void	forking_exec(t_big *struct, t_list *command, int fd[2])
+void	forking_exec(t_big *bigstruct, t_list *command, int fd[2])
 {
 	pid_t	pid;
 
@@ -88,11 +88,11 @@ void	forking_exec(t_big *struct, t_list *command, int fd[2])
 		error_function(FORKERR, NULL, 1);
 	}
 	else if (!pid)
-		child_process(struct, command, fd);
+		child_process(bigstruct, command, fd);
 }
 
 
-void	*forking_verif(t_big *struct, t_list *command, int fd[2])
+void	*forking_verif(t_big *bigstruct, t_list *command, int fd[2])
 {
 	t_little	*node;
 	DIR		*dir;
@@ -104,7 +104,7 @@ void	*forking_verif(t_big *struct, t_list *command, int fd[2])
 	if (node->infile == -1 || node->outfile == -1)
 		return (NULL);
 	if ((node->path && access(node->path, X_OK) == 0) || verif_builtin(node))
-		forking_exec(struct, command, fd);
+		forking_exec(bigstruct, command, fd);
 	else if (!verif_builtin(node) && ((node->path && \
 		!access(node->path, F_OK)) || dir))
 		status_code = 126;
@@ -117,14 +117,14 @@ void	*forking_verif(t_big *struct, t_list *command, int fd[2])
 
 
 //debut de la partie exec
-void	*main_exec(t_big *struct, t_list *command)
+void	*main_exec(t_big *bigstruct, t_list *command)
 {
 	int		fd[2];
 
-	access_command(struct, command, NULL, NULL);
+	access_command(bigstruct, command, NULL, NULL);
 	if (pipe(fd) == -1)
 		return (error_function(PIPERR, NULL, 1)); //erreur de pipe donc function error qui correspond
-	if (!forking_verif(struct, command, fd))
+	if (!forking_verif(bigstruct, command, fd))
 		return (NULL);
 	close(fd[WRITE_END]);
 	if (command->next && !((t_little *)command->next->content)->infile)

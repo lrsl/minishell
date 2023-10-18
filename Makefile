@@ -30,7 +30,7 @@ OBJ = $(SRC:.c=.o)
 
 NAME = minishell
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -g # -Wall -Wextra -Werror
 RM = rm -f
 INCS = -I ./include
 
