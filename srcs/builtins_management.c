@@ -6,7 +6,7 @@
 /*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:56:33 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/18 13:19:38 by rroussel         ###   ########.fr       */
+/*   Updated: 2023/10/18 13:35:00 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	builtin(t_big *big, t_list *cmd, int *is_exit, int n)
 		{
 			signal(SIGINT, SIG_IGN);
 			signal(SIGQUIT, SIG_IGN);
-			exec_cmd(big, cmd);
+			main_exec(big, cmd);
 		}
 		cmd = cmd->next;
 	}

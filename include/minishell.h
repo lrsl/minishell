@@ -21,6 +21,10 @@
 # include <fcntl.h>
 # include <sys/wait.h>
 # include <sys/ioctl.h>
+# include <stdio.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+
 
 typedef struct s_list
 {
@@ -72,6 +76,11 @@ int				ft_putstr_fd_newline(char *s, int fd);
 void			*ft_memset(void *str, int c, size_t n);
 void			*ft_calloc(size_t nb, size_t size);
 
+int				ft_atoi(const char *nptr);
+char			*ft_itoa(int n);
+
+int				ft_isdigit(int c);
+int				ft_isspace(char c);
 
 size_t			ft_strlen_static(const char *s);
 int				ft_putchar_fd(char c, int fd);
@@ -116,7 +125,7 @@ int				recoded_builtin_unset(t_big *big);
 int				builtin(t_big *big, t_list *cmd, int *is_exit, int n);
 int				verif_builtin(t_little *node);
 
-static int		var_env(char *av, char **env, int tab[2]);
+int				var_env(char *av, char **env, int tab[2]);
 char			*find_env(char *var, char **env, int n);
 char			**do_env(char *str, char *value, char **env, int n);
 

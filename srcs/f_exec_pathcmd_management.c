@@ -6,7 +6,7 @@
 /*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:55:42 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/18 13:19:28 by rroussel         ###   ########.fr       */
+/*   Updated: 2023/10/18 13:42:35 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,5 @@ void	access_command(t_big *bigstruct, t_list *command, char **s, char *path)
 		error_function(NPERM, node->path, 126);
 	if (dir)
 		closedir(dir);
-	xxxx(&s); //function pour free s a coder pour dans le libft
+	ft_tabfree(&s); //function pour free s a coder pour dans le libft
 }

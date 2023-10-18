@@ -6,7 +6,7 @@
 /*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:56:10 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/18 13:19:37 by rroussel         ###   ########.fr       */
+/*   Updated: 2023/10/18 13:30:31 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 // gestion de l'env
 
-static int	var_env(char *av, char **env, int tab[2])
+int	var_env(char *av, char **env, int tab[2])
 {
 	int	position;
 
