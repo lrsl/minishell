@@ -9,6 +9,7 @@
 # include <stdlib.h>
 # include <signal.h>
 # include <dirent.h>
+# include <unistd.h>
 
 typedef struct s_list
 {

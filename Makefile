@@ -24,7 +24,8 @@ SRC =    srcs/builtins_list.c \
 	srcs/utils/gt_strjoin.c \
 	srcs/utils/ft_tab_utils.c \
 	srcs/utils/ft_user_utils.c \
-								
+	srcs/utils/ft_itoa.c \
+	srcs/utils/ft_atoi.c \
 
 OBJ = $(SRC:.c=.o)
 

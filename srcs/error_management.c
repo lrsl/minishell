@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_management.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anmassy <anmassy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:56:02 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/18 12:02:56 by rroussel         ###   ########.fr       */
+/*   Updated: 2023/10/18 12:37:18 by anmassy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ extern int	status_code;
 // -> utiliser l'enum de pipex.h
 
 //function pour les messages d'erreur, a adapter et completer mais deja une bonne base
-error_function(int err_type, char *param, int err)
+void	*error_function(int err_type, char *param, int err)
 {
 	status_code = err;
 	if (err_type == QUOTE)
@@ -48,7 +48,7 @@ error_function(int err_type, char *param, int err)
 }
 
 //function pour free, a terminer avec une function de free de tab nxn a tester dans utils
-free_function(void *data)
+void	free_function(void *data)
 {
 	t_little	*node;
 
