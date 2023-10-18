@@ -1,3 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   signal_management.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/18 11:54:46 by rroussel          #+#    #+#             */
+/*   Updated: 2023/10/18 12:04:08 by rroussel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minishell.h"
+
+extern int	status_code;
 
 //gestion des signal
 void	signal_management(int signal)
@@ -17,3 +32,5 @@ void	signal_management(int signal)
 
 // int rl_on_new_line ()
 // Tell the update routines that we have moved onto a new (empty) line, usually after ouputting a newline.
+
+// TO DO

@@ -1,3 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   prompt_management.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/18 11:54:52 by rroussel          #+#    #+#             */
+/*   Updated: 2023/10/18 12:03:48 by rroussel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minishell.h"
+
+extern int	status_code;
+
 //gestion du struct : nouvelles lignes, affichage de l'user, couleurs si besoin, etc
 
 static char	*get_home(t_big big)

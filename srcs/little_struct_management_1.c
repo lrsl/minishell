@@ -1,3 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   little_struct_management_1.c                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/18 11:55:23 by rroussel          #+#    #+#             */
+/*   Updated: 2023/10/18 11:55:25 by rroussel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minishell.h"
 
 // on reinitialise chaque node avant de le remplir
 static t_little	*prepare_little(void)

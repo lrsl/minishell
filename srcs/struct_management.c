@@ -1,3 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   struct_management.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/18 11:54:39 by rroussel          #+#    #+#             */
+/*   Updated: 2023/10/18 12:04:16 by rroussel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minishell.h"
+
+extern int	status_code;
+
 /* Rempli la structure */
 t_big	fill_struct(t_big struct, char *str, char **av)
 {

@@ -1,3 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_user_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/18 11:51:10 by rroussel          #+#    #+#             */
+/*   Updated: 2023/10/18 11:52:53 by rroussel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minishell.h"
 
 static void	new_out(char ***out, int fd)
 {
@@ -25,18 +38,18 @@ void	get_user_util(char ***out, char *full, char *av, char **env)
 {
 	pid_t	pid;
 	int		fd[2];
-	char	**matrix;
+	char	**tab;
 
 	pipe(fd);
 	pid = fork();
 	if (!pid)
 	{
 		close(fd[READ_END]);
-		matrix = ft_split(av, ' ');
+		tab = ft_split(av, ' ');
 		dup2(fd[WRITE_END], STDOUT_FILENO);
 		close(fd[WRITE_END]);
 		if (!access(full, F_OK))
-			execve(full, matrix, env);
+			execve(full, tab, env);
 		exit (1);
 	}
 	close(fd[WRITE_END]);

@@ -1,3 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error_management.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/18 11:56:02 by rroussel          #+#    #+#             */
+/*   Updated: 2023/10/18 12:02:56 by rroussel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minishell.h"
+
+extern int	status_code;
+
 //gestion des messages d'erreur
 // -> utiliser l'enum de pipex.h
 
@@ -31,7 +47,7 @@ error_function(int err_type, char *param, int err)
 	return (NULL);
 }
 
-//function pour free, a terminer avec une function de free de matrix nxn a tester dans utils
+//function pour free, a terminer avec une function de free de tab nxn a tester dans utils
 free_function(void *data)
 {
 	t_little	*node;

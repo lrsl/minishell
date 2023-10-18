@@ -1,5 +1,7 @@
 ajouter dirent.h pour la variable DIR ?
 
+Gerer isatty TO DO
+
 ajouter la libft, notamment pour :
 		atoi
 		itoa

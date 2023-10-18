@@ -1,3 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   f_exec_pathcmd_management.c                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/18 11:55:42 by rroussel          #+#    #+#             */
+/*   Updated: 2023/10/18 11:55:45 by rroussel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minishell.h"
+
 // Au debtu de l'exec, verifier les commandes, le path valide / le creer
 
 static char	*verif_pathcommand(char **env_path, char *command, char *path)

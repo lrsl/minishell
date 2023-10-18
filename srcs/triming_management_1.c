@@ -1,3 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   triming_management_1.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/18 11:54:33 by rroussel          #+#    #+#             */
+/*   Updated: 2023/10/18 11:54:36 by rroussel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minishell.h"
+
 // compte nombre de mots en fonction des espaces, en prenant en compte les quotes
 static int	ft_wordcounting(const char *str, char *target, int count[2])
 {

@@ -1,3 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtins_list.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/18 11:54:22 by rroussel          #+#    #+#             */
+/*   Updated: 2023/10/18 12:01:54 by rroussel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "minishell.h"
+
+extern int	status_code;
 
 int	recoded_builtin_cd(t_big *big)
 {
@@ -9,10 +24,10 @@ int	recoded_builtin_cd(t_big *big)
 	aux = find_env("HOME", big->env, 4);
 	if (!aux)
 		aux = ft_strdup("");
-	str[1] = ft_extend_matrix(NULL, aux);
+	str[1] = ft_biggertab(NULL, aux);
 	free(aux);
 	aux = getcwd(NULL, 0);
-	str[1] = ft_extend_matrix(str[1], aux);
+	str[1] = ft_biggertab(str[1], aux);
 	free(aux);
 	cd_error(str);
 	if (!status_code)
@@ -20,10 +35,10 @@ int	recoded_builtin_cd(t_big *big)
 	aux = getcwd(NULL, 0);
 	if (!aux)
 		aux = ft_strdup("");
-	str[1] = ft_extend_matrix(str[1], aux);
+	str[1] = ft_biggertab(str[1], aux);
 	free(aux);
 	big->env = do_env("PWD", str[1][2], big->env, 3);
-	ft_free_matrix(&str[1]);
+	ft_tabfree(&str[1]);
 	return (status_code);
 }
 
@@ -73,7 +88,7 @@ int	recoded_builtin_export(t_big *big)
 	char	**argv;
 
 	argv = ((t_little *)big->commands->content)->command;
-	if (ft_matrixlen(argv) >= 2)
+	if (ft_tablen(argv) >= 2)
 	{
 		ij[0] = 1;
 		while (argv[ij[0]])
@@ -85,7 +100,7 @@ int	recoded_builtin_export(t_big *big)
 				big->env[ij[1]] = ft_strdup(argv[ij[0]]);
 			}
 			else if (!pos)
-				big->env = ft_extend_matrix(big->env, argv[ij[0]]);
+				big->env = ft_biggertab(big->env, argv[ij[0]]);
 			ij[0]++;
 		}
 	}
@@ -100,7 +115,7 @@ int	recoded_builtin_unset(t_big *big)
 
 	ij[0] = 0;
 	argv = ((t_little *)big->commands->content)->command;
-	if (ft_matrixlen(argv) >= 2)
+	if (ft_tablen(argv) >= 2)
 	{
 		while (argv[++ij[0]])
 		{
@@ -111,7 +126,7 @@ int	recoded_builtin_unset(t_big *big)
 				argv[ij[0]] = aux;
 			}
 			if (var_in_envp(argv[ij[0]], big->env, ij))
-				ft_matrix_replace_in(&big->env, NULL, ij[1]);
+				ft_tab_row_n_replace(&big->env, NULL, ij[1]);
 		}
 	}
 	return (0);
