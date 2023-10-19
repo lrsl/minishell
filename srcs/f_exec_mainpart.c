@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_exec_mainpart.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anmassy <anmassy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:55:48 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/18 13:19:29 by rroussel         ###   ########.fr       */
+/*   Updated: 2023/10/19 10:54:49 by anmassy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	child_process_builtin(t_big *bigstruct, t_little *node, int len, t_list *cm
 	signal(SIGINT, SIG_DFL);
 	signal(SIGQUIT, SIG_DFL);
 	if (!verif_builtin(node) && node->command)
-		execve(node->path, node->command, bigstruct->env);
+		execve(*node->path, node->command, bigstruct->env);
 	else if (node->command && !ft_strncmp(*node->command, "pwd", len) \
 		&& len == 3)
 		status_code =  recoded_builtin_pwd();// function oour choper le status exit code et le pwd
@@ -103,10 +103,10 @@ void	*forking_verif(t_big *bigstruct, t_list *command, int fd[2])
 		dir = opendir(*node->command);
 	if (node->infile == -1 || node->outfile == -1)
 		return (NULL);
-	if ((node->path && access(node->path, X_OK) == 0) || verif_builtin(node))
+	if ((node->path && access(*node->path, X_OK) == 0) || verif_builtin(node))
 		forking_exec(bigstruct, command, fd);
 	else if (!verif_builtin(node) && ((node->path && \
-		!access(node->path, F_OK)) || dir))
+		!access(*node->path, F_OK)) || dir))
 		status_code = 126;
 	else if (!verif_builtin(node) && node->command)
 		status_code = 127;

@@ -1,5 +1,4 @@
 #ifndef MINISHELL_H
-
 # define MINISHELL_H
 
 # define READ_END 0
@@ -25,6 +24,19 @@
 # include <readline/readline.h>
 # include <readline/history.h>
 
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 100
+# endif
+
+// # include "get_next_line.h"
+/* il va reconnaitre les fichier mais pas les compiler, si on veux les compiler il faut utilise une ligne dans le MAKEFILE :
+ 	gcl = ./get_next_Line
+	@make -C $(GNL);
+	$(GNL):
+		@make clean -C $(LIBFTDIR) 
+	$(NAME): $(OBJ)
+		@$(CC) $(CFLAGS) $(INCS) $(OBJ) -o $(NAME) $(RDLINE_FLAGS) $(GNL)
+cela devrait permettre de compiler gnl sans avoir a rajouter les fichier dans le make files */
 
 typedef struct s_list
 {
@@ -65,11 +77,21 @@ enum	error_enum
 
 ///////////////////* fonction */////////////////////
 
+int				ft_atoi(const char *nptr);
+
+static size_t	ft_strlen_nbr(long nb);
+char			*ft_itoa(int n);
+
+
 int				ft_lstsize(t_list *lst);
 void			ft_lstclear(t_list **lst, void (*del)(void*));
 t_list			*ft_lstnew(void *content);
 t_list			*ft_lstlast(t_list *lst);
 void			ft_lstadd_back(t_list **lst, t_list *newnode);
+
+void			*ft_memset(void *str, int c, size_t n);
+void			*ft_calloc(size_t nb, size_t size);
+
 
 int				ft_putstr_fd_newline(char *s, int fd);
 
@@ -115,6 +137,9 @@ char			**ft_tab_row_n_replace(char ***big, char **new, int index);
 
 static void		new_out(char ***out, int fd);
 void			get_user_util(char ***out, char *full, char *av, char **env);
+
+int				ft_isdigit(int c);
+int				ft_isspace(char c);
 
 int				recoded_builtin_cd(t_big *big);
 int				recoded_builtin_pwd(void);
@@ -189,6 +214,8 @@ char			**trim1(char const *str, char *target);
 static int		ft_counting_words(char *s, char *target, int count);
 static char		**ft_put_in_tab(char **tab, char *s, char *target, int i[3]);
 char			**trim2(char const *s, char *target);
+
+char	*get_next_line(int fd);
 
 ////////////////////////////////////////////////////
 
