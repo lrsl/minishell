@@ -6,7 +6,7 @@
 /*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:54:52 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/18 13:20:41 by rroussel         ###   ########.fr       */
+/*   Updated: 2023/10/19 12:31:01 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ char	*custom_prompt(t_big big)
 	char	*data1;
 	char	*data2;
 	char	*str;
-
 	data1 = get_user(big);
 	data2 = ft_strjoin(data1, "@minishell"); //on join user et minishell
 	free(data1);

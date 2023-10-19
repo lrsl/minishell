@@ -6,7 +6,7 @@
 /*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:55:11 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/18 13:19:17 by rroussel         ###   ########.fr       */
+/*   Updated: 2023/10/19 12:30:28 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	main(int ac, char **av, char **env)
 	char	*str;
 	char	*displayed;
 	t_big	big;
-
 	big = struct_init(av, env); //Parsing pour remplir la structure
 	while(av && ac)
 	{

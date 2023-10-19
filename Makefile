@@ -29,6 +29,7 @@ SRC =	srcs/builtins_list.c \
 	srcs/utils/ft_malloc.c \
 	srcs/utils/ft_utils.c \
 	srcs/utils/get_next_line.c \
+	srcs/utils/get_next_line_utils.c \
 	srcs/main.c \
 
 OBJ = $(SRC:.c=.o)
