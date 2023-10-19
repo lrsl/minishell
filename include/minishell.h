@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/19 14:21:17 by rroussel          #+#    #+#             */
+/*   Updated: 2023/10/19 15:03:24 by rroussel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
@@ -44,13 +56,13 @@ typedef struct s_big
 typedef struct s_little
 {
 	char	**command;
-	char	**path;
+	char	*path;
 	int		infile;
 	int		outfile;
 }			t_little;
 
 
-enum	error_enum
+enum	e_error_enum
 {
 	QUOTE = 1,
 	NDIR = 2,

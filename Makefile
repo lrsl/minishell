@@ -1,3 +1,21 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/10/19 16:19:57 by rroussel          #+#    #+#              #
+#    Updated: 2023/10/19 16:28:25 by rroussel         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+COLOUR_GREEN=\033[0;32m
+COLOUR_RED=\033[0;31m
+COLOUR_BLUE=\033[0;34m
+COLOUR_CYAN=\033[0;36m
+COLOUR_END=\033[0m
+
 SRC =	srcs/builtins_list.c \
 	srcs/builtins_management.c \
 	srcs/env_management.c \
@@ -41,28 +59,38 @@ CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
 INCS = -I ./include
 
-GREY = \e[0;30m
-RED = \e[0;31m
-GREEN = \e[0;32m
-
 all : $(NAME)
 
 %.o: %.c
+	@echo "Compiling $<"
 	@$(CC) $(CFLAGS) $(INCS) -c $< -o $@
+	@sleep .025
+	@printf "\033[1A"
+	@printf "\033[K"
 
 $(NAME): $(OBJ)
+	@echo "$(COLOUR_CYAN)\
+	███╗   ███╗██╗███╗   ██╗██╗███████╗██╗  ██╗███████╗██╗     ██╗     \n\
+	████╗ ████║██║████╗  ██║██║██╔════╝██║  ██║██╔════╝██║     ██║     \n\
+	██╔████╔██║██║██╔██╗ ██║██║███████╗███████║█████╗  ██║     ██║     \n\
+	██║╚██╔╝██║██║██║╚██╗██║██║╚════██║██╔══██║██╔══╝  ██║     ██║     \n\
+	██║ ╚═╝ ██║██║██║ ╚████║██║███████║██║  ██║███████╗███████╗███████╗\n\
+	╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝╚══════╝╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝  by rroussel & anmassy$(COLOUR_END)"
+                                                                   
 	@$(CC) $(CFLAGS) $(INCS) $(OBJ) -o $(NAME) $(RDLINE_FLAGS)
+	@echo "↪ Finished, $(COLOUR_BLUE)minishell$(COLOUR_END) $(COLOUR_GREEN)compiled$(COLOUR_END)"
 
 clean :
-	@echo "$(RED) Cleaning files..."
+	@echo "Cleaning files..."
 	@$(RM) $(OBJ) $(OBJ_BONUS)
-
+	@echo "↪ Finished, $(COLOUR_BLUE)files$(COLOUR_END) $(COLOUR_RED)cleaned$(COLOUR_END)"
+	
 fclean : clean
-	@echo -n "$(RED)"
-	@echo " Cleaning binaries..."
+	@echo "Cleaning binaries..."
 	@$(RM) $(NAME)
-
+	@echo "↪ Finished, $(COLOUR_BLUE)binaries$(COLOUR_END) $(COLOUR_RED)cleaned$(COLOUR_END)"
+	
 re : fclean all
-	@echo "$(GREEN) re-make finish"
+	@echo "↪ Finished, $(COLOUR_BLUE)re-make$(COLOUR_END) $(COLOUR_GREEN)done$(COLOUR_END)"
 
 .PHONY : all clean fclean re

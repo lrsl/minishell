@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_exec_pathcmd_management.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anmassy <anmassy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:55:42 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/19 10:57:50 by anmassy          ###   ########.fr       */
+/*   Updated: 2023/10/19 15:06:53 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static DIR	*verif_cmd(t_big *bigstruct, t_list *command, char ***s, char *path)
 	if (node && node->command && ft_strchr(*node->command, '/') && !dir)
 	{
 		*s = ft_split(*node->command, '/');
-		*node->path = ft_strdup(*node->command);
+		node->path = ft_strdup(*node->command);
 		free(node->command[0]);
 		node->command[0] = ft_strdup(s[0][ft_tablen(*s) - 1]);
 	}
@@ -63,7 +63,7 @@ static DIR	*verif_cmd(t_big *bigstruct, t_list *command, char ***s, char *path)
 		path = find_env("PATH", bigstruct->env, 4); //function a faire avec Antoine
 		*s = ft_split(path, ':');
 		free(path);
-		*node->path = verif_pathcommand(*s, *node->command, *node->path);
+		node->path = verif_pathcommand(*s, *node->command, node->path);
 		if (!node->path || !node->command[0] || !node->command[0][0])
 			error_function(NCMD, *node->command, 127);
 	}
@@ -80,11 +80,11 @@ void	access_command(t_big *bigstruct, t_list *command, char **s, char *path)
 	if (!verif_builtin(node) && node && node->command && dir)
 		error_function(IS_DIR, *node->command, 126);
 	else if (!verif_builtin(node) && node && node->path && \
-		access(*node->path, F_OK) == -1)
-		error_function(NDIR, *node->path, 127);
+		access(node->path, F_OK) == -1)
+		error_function(NDIR, node->path, 127);
 	else if (!verif_builtin(node) && node && node->path && \
-		access(*node->path, X_OK) == -1)
-		error_function(NPERM, *node->path, 126);
+		access(node->path, X_OK) == -1)
+		error_function(NPERM, node->path, 126);
 	if (dir)
 		closedir(dir);
 	ft_tabfree(&s); //function pour free s a coder pour dans le libft

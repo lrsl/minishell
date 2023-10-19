@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_management.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anmassy <anmassy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:56:33 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/19 10:53:13 by anmassy          ###   ########.fr       */
+/*   Updated: 2023/10/19 15:05:17 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	verif_builtin(t_little *node)
 
 	if (!node->command)
 		return (0);
-	if ((node->command && ft_strchr(*node->command, '/')) || (node->path && ft_strchr(*node->path, '/')))
+	if ((node->command && ft_strchr(*node->command, '/')) || (node->path && ft_strchr(node->path, '/')))
 		return (0);
 	l = ft_strlen(*node->command);
 	if (!ft_strncmp(*node->command, "pwd", l) && l == 3)
