@@ -1,4 +1,4 @@
-SRC =    srcs/builtins_list.c \
+SRC =	srcs/builtins_list.c \
 	srcs/builtins_management.c \
 	srcs/env_management.c \
 	srcs/error_management.c \
@@ -28,11 +28,14 @@ SRC =    srcs/builtins_list.c \
 	srcs/utils/ft_atoi.c \
 	srcs/utils/ft_malloc.c \
 	srcs/utils/ft_utils.c \
+	srcs/main.c \
 
 OBJ = $(SRC:.c=.o)
 
 NAME = minishell
 CC = cc
+# GNL = ./get_next_Line
+RDLINE_FLAGS = -L /usr/lib/x86_64-linux-gnu -lreadline
 CFLAGS = -g # -Wall -Wextra -Werror
 RM = rm -f
 INCS = -I ./include
@@ -46,8 +49,11 @@ all : $(NAME)
 %.o: %.c
 	@$(CC) $(CFLAGS) $(INCS) -c $< -o $@
 
+# $(GNL):
+# 		@make clean -C $(LIBFTDIR) 
+
 $(NAME): $(OBJ)
-	@$(CC) $(CFLAGS) $(INCS) $(OBJ) -o $(NAME)
+	@$(CC) $(CFLAGS) $(INCS) $(OBJ) -o $(NAME) $(RDLINE_FLAGS)
 
 clean :
 	@echo "$(RED) Cleaning files..."
