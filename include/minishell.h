@@ -28,16 +28,6 @@
 #  define BUFFER_SIZE 100
 # endif
 
-// # include "get_next_line.h"
-/* il va reconnaitre les fichier mais pas les compiler, si on veux les compiler il faut utilise une ligne dans le MAKEFILE :
- 	gcl = ./get_next_Line
-	@make -C $(GNL);
-	$(GNL):
-		@make clean -C $(LIBFTDIR) 
-	$(NAME): $(OBJ)
-		@$(CC) $(CFLAGS) $(INCS) $(OBJ) -o $(NAME) $(RDLINE_FLAGS) $(GNL)
-cela devrait permettre de compiler gnl sans avoir a rajouter les fichier dans le make files */
-
 typedef struct s_list
 {
 	void			*content;
@@ -79,9 +69,7 @@ enum	error_enum
 
 int				ft_atoi(const char *nptr);
 
-static size_t	ft_strlen_nbr(long nb);
 char			*ft_itoa(int n);
-
 
 int				ft_lstsize(t_list *lst);
 void			ft_lstclear(t_list **lst, void (*del)(void*));
@@ -92,14 +80,7 @@ void			ft_lstadd_back(t_list **lst, t_list *newnode);
 void			*ft_memset(void *str, int c, size_t n);
 void			*ft_calloc(size_t nb, size_t size);
 
-
 int				ft_putstr_fd_newline(char *s, int fd);
-
-void			*ft_memset(void *str, int c, size_t n);
-void			*ft_calloc(size_t nb, size_t size);
-
-int				ft_atoi(const char *nptr);
-char			*ft_itoa(int n);
 
 int				ft_isdigit(int c);
 int				ft_isspace(char c);
@@ -110,8 +91,6 @@ int				ft_putstr_fd(char *s, int fd);
 int				ft_putendl_fd(char *s, int fd);
 int				ft_puttab_fd(char **tab, int nl, int fd);
 
-static int		ft_countwords(const char *s, char c);
-static char		**ft_writeintab(char **aux, char const *s, char c);
 char			**ft_split(char const *s, char c);
 
 size_t			ft_strlen(const char *s);
@@ -135,7 +114,6 @@ void			ft_tabfree(char ***tab);
 char			**ft_biggertab(char **in, char *newstr);
 char			**ft_tab_row_n_replace(char ***big, char **new, int index);
 
-static void		new_out(char ***out, int fd);
 void			get_user_util(char ***out, char *full, char *av, char **env);
 
 int				ft_isdigit(int c);
@@ -161,18 +139,14 @@ int				recoded_builtin_exit(t_list *cmd, int *is_exit);
 void			cd_error(char **str[2]);
 
 char			*path_expanding(char *str, int i, int quotes[2], char *var);
-static char		*substr_var_expanding(char *str, int i, t_big *big);
 char			*var_expanding(char *str, int i, int quotes[2], t_big *big);
 
 void			child_process_builtin(t_big *bigstruct, t_little *node, int len, t_list *command);
-static void		*child_process_next(t_list *command, int fd[2]);
 void			*child_process(t_big *bigstruct, t_list *command, int fd[2]);
 void			forking_exec(t_big *bigstruct, t_list *command, int fd[2]);
 void			*forking_verif(t_big *bigstruct, t_list *command, int fd[2]);
 void			*main_exec(t_big *bigstruct, t_list *command);
 
-static char		*verif_pathcommand(char **env_path, char *command, char *path);
-static DIR		*verif_cmd(t_big *bigstruct, t_list *command, char ***s, char *path);
 void			access_command(t_big *bigstruct, t_list *command, char **s, char *path);
 
 int				get_fd(int oldfd, char *path, int flags[2]);
@@ -181,21 +155,14 @@ t_little		*manage_outfile_2(t_little *node, char **args, int *i);
 t_little		*manage_infile_1(t_little *node, char **args, int *i);
 t_little		*manage_infile_2(t_little *node, char **args, int *i);
 
-static t_little	*prepare_little(void);
-static t_little	*adapt_to_param_type(t_little *node, char **a[2], int *i);
-static char		**dup_trim(char **tab_of_args);
-static t_list	*filling_finished(t_list *commands, char **args, char **temp);
 t_list			*put_in_nodes(char **tab_of_args, int i);
 
-static int		adapt_malloc(char const *s1);
 char			*quote_trim(char const *s1, int quote_simple, int quote_double);
 
 char			**final_split(char **tab, t_big *big);
 void			*args_parsing(char **tab, t_big *big);
 void			*args_verif(char *out, t_big *big);
 
-static char		*get_home(t_big big);
-static char		*get_user(t_big big);
 char			*custom_prompt(t_big big);
 
 int				ft_here_doc(char *str[2], char *aux[2]);
@@ -207,15 +174,11 @@ t_big			fill_struct(t_big bigstruct, char *str, char **av);
 void			ft_getpid(t_big *bigstruct);
 t_big			struct_init(char **av, char **env);
 
-static int		ft_wordcounting(const char *str, char *target, int count[2]);
-static char		**put_in_tab(char **tab, char const *str, char *target, int i[3]);
 char			**trim1(char const *str, char *target);
 
-static int		ft_counting_words(char *s, char *target, int count);
-static char		**ft_put_in_tab(char **tab, char *s, char *target, int i[3]);
 char			**trim2(char const *s, char *target);
 
-char	*get_next_line(int fd);
+char			*get_next_line(int fd);
 
 ////////////////////////////////////////////////////
 

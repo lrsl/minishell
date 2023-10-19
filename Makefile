@@ -36,7 +36,7 @@ OBJ = $(SRC:.c=.o)
 NAME = minishell
 CC = cc
 RDLINE_FLAGS = -L /usr/lib/x86_64-linux-gnu -lreadline
-CFLAGS = -g # -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
 INCS = -I ./include
 
