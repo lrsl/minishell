@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_puttab_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anmassy <anmassy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:53:49 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/18 13:17:51 by rroussel         ###   ########.fr       */
+/*   Updated: 2023/10/20 11:54:53 by anmassy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,3 @@ int	ft_puttab_fd(char **tab, int nl, int fd)
 	}
 	return (count);
 }
-
