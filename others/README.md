@@ -15,7 +15,7 @@ various resources
 	https://gitlab.com/madebypixel02/minishell#installation
 	https://minishell.simple.ink/
 
-Global variable: we need it to control the signals we cxan have with "Ctrl-C" or "Ctrl-\". It has to update a variable (je l'ai appelee "status_code"), so we can use it in a function (genre "ft_signal").
+Global variable: we need it to control the signals we cxan have with "Ctrl-C" or "Ctrl-\". It has to update a variable (je l'ai appelee "g_status_code"), so we can use it in a function (genre "ft_signal").
 
 DIR variable: se renseigner sur comment ca fonctionne exactrement pour naviguer avec ce type
 
@@ -90,7 +90,7 @@ Ce que ca donne avec la phrase d'exemple au dessus:
 		- command: {wc, -l, NULL}
 -  env: (env from main)
 -  pid: process ID of current instance
--  status_code: 0 (if last command exits normally)
+-  g_status_code: 0 (if last command exits normally)
 
 +++++++++++++
 

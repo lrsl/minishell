@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   triming_management_2.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rsl <rsl@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:54:28 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/19 22:42:45 by rsl              ###   ########.fr       */
+/*   Updated: 2023/10/20 12:14:48 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ static char	**ft_put_in_tab(char **tab, char *s, char *target, int i[3])
 	return (tab);
 }
 
-// on split a nouveau en prenant en compte les <, > et | cette fois (dernier split)
 char	**trim2(char const *s, char *target)
 {
 	char	**tab;

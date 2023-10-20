@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   little_struct_management_1.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rsl <rsl@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:55:23 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/19 22:43:26 by rsl              ###   ########.fr       */
+/*   Updated: 2023/10/20 12:06:20 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-// on reinitialise chaque node avant de le remplir
 static t_little	*prepare_little(void)
 {
 	t_little	*little;
@@ -27,7 +26,6 @@ static t_little	*prepare_little(void)
 	return (little);
 }
 
-// va remplir les params de little selon les types des arguments
 static t_little	*adapt_to_param_type(t_little *node, char **a[2], int *i)
 {
 	if (a[0][*i])
@@ -54,7 +52,6 @@ static t_little	*adapt_to_param_type(t_little *node, char **a[2], int *i)
 	return (node);
 }
 
-//classic trim ou on dupliaue puis on retire les whitespaces
 static char	**dup_trim(char **tab_of_args)
 {
 	char	**tmp_tab;
@@ -62,17 +59,16 @@ static char	**dup_trim(char **tab_of_args)
 	int		i;
 
 	i = -1;
-	tmp_tab = ft_duptab(tab_of_args); // on dup
+	tmp_tab = ft_duptab(tab_of_args);
 	while (tmp_tab && tmp_tab[++i])
 	{
-		tmp_str = quote_trim(tmp_tab[i], 0, 0); //on trim
+		tmp_str = quote_trim(tmp_tab[i], 0, 0);
 		free(tmp_tab[i]);
 		tmp_tab[i] = tmp_str;
 	}
 	return (tmp_tab);
 }
 
-// mettre fin a la liste chainée
 static t_list	*filling_finished(t_list *commands, char **args, char **temp)
 {
 	ft_lstclear(&commands, free_function);
@@ -81,7 +77,6 @@ static t_list	*filling_finished(t_list *commands, char **args, char **temp)
 	return (NULL);
 }
 
-// prend un tabvleau d'arguments, le trim, puis cree une liste chainee de little, remplie des arguments selon leur type
 t_list	*put_in_nodes(char **tab_of_args, int i)
 {
 	t_list	*commands[2];
@@ -91,15 +86,17 @@ t_list	*put_in_nodes(char **tab_of_args, int i)
 	temp[1] = dup_trim(tab_of_args);
 	while (tab_of_args[++i])
 	{
-		commands[1] = ft_lstlast(commands[0]); // on crée la liste chainée de 'little'
-		if (i == 0 || (tab_of_args[i][0] == '|' && tab_of_args[i + 1] && tab_of_args[i + 1][0]))
+		commands[1] = ft_lstlast(commands[0]);
+		if (i == 0 || (tab_of_args[i][0] == '|' && tab_of_args[i + 1] \
+		&& tab_of_args[i + 1][0]))
 		{
 			i += tab_of_args[i][0] == '|';
 			ft_lstadd_back(&commands[0], ft_lstnew(prepare_little()));
 			commands[1] = ft_lstlast(commands[0]);
 		}
 		temp[0] = tab_of_args;
-		commands[1]->content = adapt_to_param_type(commands[1]->content, temp, &i); //on va remplir en fonction du type de param
+		commands[1]->content = adapt_to_param_type(commands[1]->content, \
+		temp, &i);
 		if (i < 0)
 			return (filling_finished(commands[0], tab_of_args, temp[1]));
 		if (!tab_of_args[i])
@@ -109,4 +106,3 @@ t_list	*put_in_nodes(char **tab_of_args, int i)
 	ft_tabfree(&tab_of_args);
 	return (commands[0]);
 }
-

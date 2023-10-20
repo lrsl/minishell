@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   f_exec_mainpart.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rsl <rsl@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:55:48 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/19 22:43:46 by rsl              ###   ########.fr       */
+/*   Updated: 2023/10/20 11:56:09 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-extern int	status_code;
+extern int	g_status_code;
 
 // execution de minishell
 
@@ -25,15 +25,15 @@ void	child_process_builtin(t_big *bigstruct, t_little *node, int len, t_list *cm
 		execve(node->path, node->command, bigstruct->env);
 	else if (node->command && !ft_strncmp(*node->command, "pwd", len) \
 		&& len == 3)
-		status_code =  recoded_builtin_pwd();// function oour choper le status exit code et le pwd
+		g_status_code =  recoded_builtin_pwd();// function oour choper le status exit code et le pwd
 	else if (verif_builtin(node) && node->command && \
 		!ft_strncmp(*node->command, "echo", len) && len == 4)
-		status_code = recoded_builtin_echo(cmd);// builtin echo a faire
+		g_status_code = recoded_builtin_echo(cmd);// builtin echo a faire
 	else if (verif_builtin(node) && node->command && \
 		!ft_strncmp(*node->command, "env", len) && len == 3)
 	{
 		ft_puttab_fd(bigstruct->env, 1, 1);
-		status_code = 0;
+		g_status_code = 0;
 	}
 }
 
@@ -73,7 +73,7 @@ void	*child_process(t_big *bigstruct, t_list *command, int fd[2])
 	close(fd[READ_END]);
 	child_process_builtin(bigstruct, node, len, command);
 	ft_lstclear(&bigstruct->commands, free_function);
-	exit(status_code);
+	exit(g_status_code);
 }
 
 void	forking_exec(t_big *bigstruct, t_list *command, int fd[2])
@@ -107,9 +107,9 @@ void	*forking_verif(t_big *bigstruct, t_list *command, int fd[2])
 		forking_exec(bigstruct, command, fd);
 	else if (!verif_builtin(node) && ((node->path && \
 		!access(node->path, F_OK)) || dir))
-		status_code = 126;
+		g_status_code = 126;
 	else if (!verif_builtin(node) && node->command)
-		status_code = 127;
+		g_status_code = 127;
 	if (dir)
 		closedir(dir);
 	return ("");

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   struct_management.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rsl <rsl@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:54:39 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/19 22:42:50 by rsl              ###   ########.fr       */
+/*   Updated: 2023/10/20 11:56:09 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-extern int	status_code;
+extern int	g_status_code;
 
 /* Rempli la structure */
 t_big	fill_struct(t_big bigstruct, char *str, char **av)
@@ -72,7 +72,7 @@ t_big	struct_init(char **av, char **env)
 	str = NULL;
 	bigstruct.commands = NULL;
 	bigstruct.env = ft_duptab(env); //copie de env
-	status_code = 0;
+	g_status_code = 0;
 	ft_getpid(&bigstruct);
 	bigstruct = fill_struct(bigstruct, str, av); //remplir la structure avec les vraies valeurs
 	return (bigstruct);

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_management.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rsl <rsl@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:54:52 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/19 22:42:58 by rsl              ###   ########.fr       */
+/*   Updated: 2023/10/20 11:56:09 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-extern int	status_code;
+extern int	g_status_code;
 
 //gestion du bigstruct : nouvelles lignes, affichage de l'user, couleurs si besoin, etc
 
@@ -77,7 +77,7 @@ char	*custom_prompt(t_big big)
 	data1 = ft_strjoin(data2, str); //on join le home en plus
 	free(str);
 	free(data2);
-	if (!status_code || status_code == -1) //on check le status
+	if (!g_status_code || g_status_code == -1) //on check le status
 		data2 = ft_strjoin(data1, BLUE); //blue
 	else
 		data2 = ft_strjoin(data1, RED); //red

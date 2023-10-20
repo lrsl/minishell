@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   little_struct_management_2.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rsl <rsl@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:55:16 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/19 22:43:24 by rsl              ###   ########.fr       */
+/*   Updated: 2023/10/20 12:06:36 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ static int	adapt_malloc(char const *s1)
 	{
 		quote_simple = (quote_simple + (!quote_double && s1[i] == '\'')) % 2;
 		quote_double = (quote_double + (!quote_simple && s1[i] == '\"')) % 2;
-		if ((s1[i] == '\"' && !quote_simple) || (s1[i] == '\'' && !quote_double))
+		if ((s1[i] == '\"' && !quote_simple) || (s1[i] == '\'' \
+		&& !quote_double))
 			count++;
 		i++;
 	}
@@ -36,7 +37,6 @@ static int	adapt_malloc(char const *s1)
 	return (count);
 }
 
-//classic trim pour nettoyer mais avec les quotes
 char	*quote_trim(char const *s1, int quote_simple, int quote_double)
 {
 	int		count;
@@ -55,7 +55,8 @@ char	*quote_trim(char const *s1, int quote_simple, int quote_double)
 	{
 		quote_simple = (quote_simple + (!quote_double && s1[i[0]] == '\'')) % 2;
 		quote_double = (quote_double + (!quote_simple && s1[i[0]] == '\"')) % 2;
-		if ((s1[i[0]] != '\"' || quote_simple) && (s1[i[0]] != '\'' || quote_double) && ++i[1] >= 0)
+		if ((s1[i[0]] != '\"' || quote_simple) && (s1[i[0]] != '\'' \
+		|| quote_double) && ++i[1] >= 0)
 			trimmed[i[1]] = s1[i[0]];
 		i[0]++;
 	}

@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_list.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rsl <rsl@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:54:22 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/19 22:42:34 by rsl              ###   ########.fr       */
+/*   Updated: 2023/10/20 11:56:09 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-extern int	status_code;
+extern int	g_status_code;
 
 int	recoded_builtin_cd(t_big *big)
 {
 	char	**str[2];
 	char	*aux;
 
-	status_code = 0;
+	g_status_code = 0;
 	str[0] = ((t_little *)big->commands->content)->command;
 	aux = find_env("HOME", big->env, 4);
 	if (!aux)
@@ -30,7 +30,7 @@ int	recoded_builtin_cd(t_big *big)
 	str[1] = ft_biggertab(str[1], aux);
 	free(aux);
 	cd_error(str);
-	if (!status_code)
+	if (!g_status_code)
 		big->env = do_env("OLDPWD", str[1][1], big->env, 6);
 	aux = getcwd(NULL, 0);
 	if (!aux)
@@ -39,7 +39,7 @@ int	recoded_builtin_cd(t_big *big)
 	free(aux);
 	big->env = do_env("PWD", str[1][2], big->env, 3);
 	ft_tabfree(&str[1]);
-	return (status_code);
+	return (g_status_code);
 }
 
 int	recoded_builtin_pwd(void)

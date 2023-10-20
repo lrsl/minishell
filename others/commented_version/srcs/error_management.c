@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   error_management.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rsl <rsl@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:56:02 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/19 22:43:54 by rsl              ###   ########.fr       */
+/*   Updated: 2023/10/20 11:56:09 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-extern int	status_code;
+extern int	g_status_code;
 
 //gestion des messages d'erreur
 // -> utiliser l'enum de pipex.h
@@ -20,7 +20,7 @@ extern int	status_code;
 //function pour les messages d'erreur, a adapter et completer mais deja une bonne base
 void	*error_function(int err_type, char *param, int err)
 {
-	status_code = err;
+	g_status_code = err;
 	if (err_type == QUOTE)
 		ft_putstr_fd("minishell: error while looking for matching quote\n", 2);
 	else if (err_type == NDIR)
@@ -126,11 +126,11 @@ void	cd_error(char **str[2])
 		dir = opendir(str[0][1]);
 	if (!str[0][1] && str[1][0] && !str[1][0][0])
 	{
-		status_code = 1;
+		g_status_code = 1;
 		ft_putstr_fd("minishell: HOME not set\n", 2);
 	}
 	if (str[1][0] && !str[0][1])
-		status_code = chdir(str[1][0]) == -1;
+		g_status_code = chdir(str[1][0]) == -1;
 	if (str[0][1] && dir && access(str[0][1], F_OK) != -1)
 		chdir(str[0][1]);
 	else if (str[0][1] && access(str[0][1], F_OK) == -1)

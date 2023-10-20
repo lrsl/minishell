@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   expander_management.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rsl <rsl@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:55:53 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/19 22:43:50 by rsl              ###   ########.fr       */
+/*   Updated: 2023/10/20 11:56:09 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-extern int	status_code;
+extern int	g_status_code;
 
 char	*path_expanding(char *str, int i, int quotes[2], char *var)
 {
@@ -56,8 +56,8 @@ static char	*substr_var_expanding(char *str, int i, t_big *big)
 	var = find_env(&str[i], big->env, ft_strchr_str(&str[i], "\"\'$|>< "));
 	if (!var && str[i] == '$') //si pas de VAR & $, on met le pid a la place
 		var = ft_itoa(big->pid);
-	else if (!var && str[i] == '?') //si pas de VAR $ ?, on met le status_code a la place
-		var = ft_itoa(status_code);
+	else if (!var && str[i] == '?') //si pas de VAR $ ?, on met le g_status_code a la place
+		var = ft_itoa(g_status_code);
 	path = ft_strjoin(final_str, var); //on concatene pour avoir la avriable expandée et sa valeur associée
 	free(final_str);
 	final_str = ft_strjoin(path, &str[i + end_i]);

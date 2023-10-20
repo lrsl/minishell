@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_management.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rsl <rsl@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:54:58 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/19 22:43:04 by rsl              ###   ########.fr       */
+/*   Updated: 2023/10/20 11:56:09 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-extern int	status_code;
+extern int	g_status_code;
 
 // on expand les variables, on resplit et on remet tout dans tab
 char	**final_split(char **tab, t_big *big)
@@ -44,13 +44,13 @@ void	*args_parsing(char **tab, t_big *big)
 	if (!big->commands) //si erreur on garde big unchanged
 		return (big);
 	i = ft_lstsize(big->commands); //on calcule la taille de la liste créée
-	status_code = builtin(big, big->commands, &trigger, 0); //on appelle les builtins
+	g_status_code = builtin(big, big->commands, &trigger, 0); //on appelle les builtins
 	while (i-- > 0) //tant que la liste chainée existe
-		waitpid(-1, &status_code, 0); //on attend le child process
-	if (!trigger && status_code == 13)
-		status_code = 0;
-	if (status_code > 255)
-		status_code = status_code / 255;
+		waitpid(-1, &g_status_code, 0); //on attend le child process
+	if (!trigger && g_status_code == 13)
+		g_status_code = 0;
+	if (g_status_code > 255)
+		g_status_code = g_status_code / 255;
 	if (tab && trigger)
 	{
 		ft_lstclear(&big->commands, free_function);

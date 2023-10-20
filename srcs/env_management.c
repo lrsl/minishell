@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   env_management.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rsl <rsl@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:56:10 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/19 22:43:57 by rsl              ###   ########.fr       */
+/*   Updated: 2023/10/20 12:14:14 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-// gestion de l'env
 
 int	var_env(char *av, char **env, int tab[2])
 {
@@ -60,7 +58,7 @@ char	**do_env(char *str, char *value, char **env, int n)
 		n = ft_strlen(str);
 	i[0] = -1;
 	tab[0] = ft_strjoin(str, "=");
-	tab[1] = ft_strjoin(tab[0], value); //on cree donc PWD=*data du getcwd*
+	tab[1] = ft_strjoin(tab[0], value);
 	free(tab[0]);
 	while (!ft_strchr(str, '=') && env && env[++i[0]])
 	{

@@ -3,18 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_management.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rsl <rsl@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:54:58 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/19 22:43:04 by rsl              ###   ########.fr       */
+/*   Updated: 2023/10/20 12:08:57 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-extern int	status_code;
+extern int	g_status_code;
 
-// on expand les variables, on resplit et on remet tout dans tab
 char	**final_split(char **tab, t_big *big)
 {
 	char	**subsplit;
@@ -24,10 +23,11 @@ char	**final_split(char **tab, t_big *big)
 	i = -1;
 	while (tab && tab[++i])
 	{
-		tab[i] = var_expanding(tab[i], -1, quotes, big); //expand les var $
-		tab[i] = path_expanding(tab[i], -1, quotes,	find_env("HOME", big->env, 4));
-		subsplit = trim2(tab[i], "<|>"); //on split encore avec <, > et |
-		ft_tab_row_n_replace(&tab, subsplit, i); //on actualise dans tab
+		tab[i] = var_expanding(tab[i], -1, quotes, big);
+		tab[i] = path_expanding(tab[i], -1, quotes, \
+		find_env("HOME", big->env, 4));
+		subsplit = trim2(tab[i], "<|>");
+		ft_tab_row_n_replace(&tab, subsplit, i);
 		i += ft_tablen(subsplit) - 1;
 		ft_tabfree(&subsplit);
 	}
@@ -40,17 +40,17 @@ void	*args_parsing(char **tab, t_big *big)
 	int	i;
 
 	trigger = 0;
-	big->commands = put_in_nodes(final_split(tab, big), -1); //final_split : on resplit. put_in_nodes : on met les morceaux dans les structures s_little
-	if (!big->commands) //si erreur on garde big unchanged
+	big->commands = put_in_nodes(final_split(tab, big), -1);
+	if (!big->commands)
 		return (big);
-	i = ft_lstsize(big->commands); //on calcule la taille de la liste créée
-	status_code = builtin(big, big->commands, &trigger, 0); //on appelle les builtins
-	while (i-- > 0) //tant que la liste chainée existe
-		waitpid(-1, &status_code, 0); //on attend le child process
-	if (!trigger && status_code == 13)
-		status_code = 0;
-	if (status_code > 255)
-		status_code = status_code / 255;
+	i = ft_lstsize(big->commands);
+	g_status_code = builtin(big, big->commands, &trigger, 0);
+	while (i-- > 0) 
+		waitpid(-1, &g_status_code, 0);
+	if (!trigger && g_status_code == 13)
+		g_status_code = 0;
+	if (g_status_code > 255)
+		g_status_code = g_status_code / 255;
 	if (tab && trigger)
 	{
 		ft_lstclear(&big->commands, free_function);
@@ -59,7 +59,6 @@ void	*args_parsing(char **tab, t_big *big)
 	return (big);
 }
 
-//debut du parsing
 void	*args_verif(char *out, t_big *big)
 {
 	char		**tab;
@@ -68,21 +67,23 @@ void	*args_verif(char *out, t_big *big)
 	if (!out)
 	{
 		printf("exit\n");
-		return (NULL); //donne lieu au break dans le main
+		return (NULL);
 	}
 	if (out[0] != '\0')
-		add_history(out); //sinon on ajoute a l'history
-	tab = trim1(out, " "); //first triming avec les spaces et les quotes
+		add_history(out);
+	tab = trim1(out, " ");
 	free(out);
 	if (!tab)
 		error_function(QUOTE, NULL, 1);
 	if (!tab)
 		return ("");
-	big = args_parsing(tab, big); //gros du parsing
+	big = args_parsing(tab, big);
 	if (big && big->commands)
 		node = big->commands->content;
-	if (big && big->commands && node && node->command && ft_lstsize(big->commands) == 1)
-		big->env = do_env("_", node->command[ft_tablen(node->command) - 1], big->env, 1);
+	if (big && big->commands && node && node->command \
+	&& ft_lstsize(big->commands) == 1)
+		big->env = do_env("_", node->command[ft_tablen(node->command) - 1], \
+		big->env, 1);
 	if (big && big->commands)
 		ft_lstclear(&big->commands, free_function);
 	return (big);

@@ -3,24 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   f_heredoc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rsl <rsl@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:55:34 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/19 22:43:37 by rsl              ###   ########.fr       */
+/*   Updated: 2023/10/20 12:04:56 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-extern int	status_code;
-
-//gestion du heredoc (reprendre celui de pipex)
+extern int	g_status_code;
 
 char	*ft_here_doc_str(char *str[2], size_t len, char *limit, char *trigger)
 {
 	char	*temp;
 
-	while (status_code != 130 && (!str[0] || ft_strncmp(str[0], limit, len) || ft_strlen(limit) != len))
+	while (g_status_code != 130 && (!str[0] || ft_strncmp(str[0], \
+	limit, len) || ft_strlen(limit) != len))
 	{
 		temp = str[1];
 		str[1] = ft_strjoin(str[1], str[0]);
@@ -45,7 +44,7 @@ int	ft_here_doc(char *str[2], char *aux[2])
 {
 	int		fd[2];
 
-	status_code = 0;
+	g_status_code = 0;
 	if (pipe(fd) == -1)
 	{
 		error_function(PIPERR, NULL, 1);
@@ -55,7 +54,7 @@ int	ft_here_doc(char *str[2], char *aux[2])
 	write(fd[WRITE_END], str[1], ft_strlen(str[1]));
 	free(str[1]);
 	close(fd[WRITE_END]);
-	if (status_code == 130)
+	if (g_status_code == 130)
 	{
 		close(fd[READ_END]);
 		return (-1);

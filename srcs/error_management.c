@@ -3,24 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   error_management.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rsl <rsl@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:56:02 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/19 22:43:54 by rsl              ###   ########.fr       */
+/*   Updated: 2023/10/20 11:57:45 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-extern int	status_code;
+extern int	g_status_code;
 
-//gestion des messages d'erreur
-// -> utiliser l'enum de pipex.h
-
-//function pour les messages d'erreur, a adapter et completer mais deja une bonne base
 void	*error_function(int err_type, char *param, int err)
 {
-	status_code = err;
+	g_status_code = err;
 	if (err_type == QUOTE)
 		ft_putstr_fd("minishell: error while looking for matching quote\n", 2);
 	else if (err_type == NDIR)
@@ -47,7 +43,6 @@ void	*error_function(int err_type, char *param, int err)
 	return (NULL);
 }
 
-//function pour free, a terminer avec une function de free de tab nxn a tester dans utils
 void	free_function(void *data)
 {
 	t_little	*node;
@@ -87,11 +82,10 @@ int	ft_atoi2(const char *nptr, long *nbr)
 	return (0);
 }
 
-//function pour exit
 int	recoded_builtin_exit(t_list *cmd, int *is_exit)
 {
 	t_little	*node;
-	long	status[2];
+	long		status[2];
 
 	node = cmd->content;
 	*is_exit = !cmd->next;
@@ -126,11 +120,11 @@ void	cd_error(char **str[2])
 		dir = opendir(str[0][1]);
 	if (!str[0][1] && str[1][0] && !str[1][0][0])
 	{
-		status_code = 1;
+		g_status_code = 1;
 		ft_putstr_fd("minishell: HOME not set\n", 2);
 	}
 	if (str[1][0] && !str[0][1])
-		status_code = chdir(str[1][0]) == -1;
+		g_status_code = chdir(str[1][0]) == -1;
 	if (str[0][1] && dir && access(str[0][1], F_OK) != -1)
 		chdir(str[0][1]);
 	else if (str[0][1] && access(str[0][1], F_OK) == -1)
@@ -140,4 +134,3 @@ void	cd_error(char **str[2])
 	if (str[0][1] && dir)
 		closedir(dir);
 }
-

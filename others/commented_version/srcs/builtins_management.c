@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_management.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rsl <rsl@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:56:33 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/19 22:44:01 by rsl              ###   ########.fr       */
+/*   Updated: 2023/10/20 11:56:09 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-extern int	status_code;
+extern int	g_status_code;
 
 // do the builtins
 int	builtin(t_big *big, t_list *cmd, int *is_exit, int n)
@@ -26,13 +26,13 @@ int	builtin(t_big *big, t_list *cmd, int *is_exit, int n)
 		if (a)
 			n = ft_strlen(*a);
 		if (a && !ft_strncmp(*a, "exit", n) && n == 4)
-			status_code = recoded_builtin_exit(cmd, is_exit);
+			g_status_code = recoded_builtin_exit(cmd, is_exit);
 		else if (!cmd->next && a && !ft_strncmp(*a, "cd", n) && n == 2)
-			status_code = recoded_builtin_cd(big);
+			g_status_code = recoded_builtin_cd(big);
 		else if (!cmd->next && a && !ft_strncmp(*a, "export", n) && n == 6)
-			status_code = recoded_builtin_export(big);
+			g_status_code = recoded_builtin_export(big);
 		else if (!cmd->next && a && !ft_strncmp(*a, "unset", n) && n == 5)
-			status_code = recoded_builtin_unset(big);
+			g_status_code = recoded_builtin_unset(big);
 		else
 		{
 			signal(SIGINT, SIG_IGN);
@@ -41,7 +41,7 @@ int	builtin(t_big *big, t_list *cmd, int *is_exit, int n)
 		}
 		cmd = cmd->next;
 	}
-	return (status_code);
+	return (g_status_code);
 }
 
 //checker pour savoir si c'est un builtin ou pas

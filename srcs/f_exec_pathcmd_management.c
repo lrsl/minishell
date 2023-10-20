@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   f_exec_pathcmd_management.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rsl <rsl@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:55:42 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/19 22:43:42 by rsl              ###   ########.fr       */
+/*   Updated: 2023/10/20 12:04:45 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-// Au debtu de l'exec, verifier les commandes, le path valide / le creer
 
 static char	*verif_pathcommand(char **env_path, char *command, char *path)
 {
@@ -45,7 +43,7 @@ static char	*verif_pathcommand(char **env_path, char *command, char *path)
 static DIR	*verif_cmd(t_big *bigstruct, t_list *command, char ***s, char *path)
 {
 	t_little	*node;
-	DIR		*dir;
+	DIR			*dir;
 
 	dir = NULL;
 	node = command->content;
@@ -60,7 +58,7 @@ static DIR	*verif_cmd(t_big *bigstruct, t_list *command, char ***s, char *path)
 	}
 	else if (!verif_builtin(node) && node && node->command && !dir)
 	{
-		path = find_env("PATH", bigstruct->env, 4); //function a faire avec Antoine
+		path = find_env("PATH", bigstruct->env, 4);
 		*s = ft_split(path, ':');
 		free(path);
 		node->path = verif_pathcommand(*s, *node->command, node->path);
@@ -73,7 +71,7 @@ static DIR	*verif_cmd(t_big *bigstruct, t_list *command, char ***s, char *path)
 void	access_command(t_big *bigstruct, t_list *command, char **s, char *path)
 {
 	t_little	*node;
-	DIR		*dir;
+	DIR			*dir;
 
 	node = command->content;
 	dir = verif_cmd(bigstruct, command, &s, path);
@@ -87,5 +85,5 @@ void	access_command(t_big *bigstruct, t_list *command, char **s, char *path)
 		error_function(NPERM, node->path, 126);
 	if (dir)
 		closedir(dir);
-	ft_tabfree(&s); //function pour free s a coder pour dans le libft
+	ft_tabfree(&s);
 }

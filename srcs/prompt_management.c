@@ -3,18 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   prompt_management.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rsl <rsl@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:54:52 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/19 22:42:58 by rsl              ###   ########.fr       */
+/*   Updated: 2023/10/20 12:09:41 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-extern int	status_code;
-
-//gestion du bigstruct : nouvelles lignes, affichage de l'user, couleurs si besoin, etc
+extern int	g_status_code;
 
 static char	*get_home(t_big big)
 {
@@ -70,19 +68,20 @@ char	*custom_prompt(t_big big)
 	char	*data1;
 	char	*data2;
 	char	*str;
+
 	data1 = get_user(big);
-	data2 = ft_strjoin(data1, "@minishell"); //on join user et minishell
+	data2 = ft_strjoin(data1, "@minishell");
 	free(data1);
 	str = get_home(big);
-	data1 = ft_strjoin(data2, str); //on join le home en plus
+	data1 = ft_strjoin(data2, str);
 	free(str);
 	free(data2);
-	if (!status_code || status_code == -1) //on check le status
-		data2 = ft_strjoin(data1, BLUE); //blue
+	if (!g_status_code || g_status_code == -1)
+		data2 = ft_strjoin(data1, BLUE);
 	else
-		data2 = ft_strjoin(data1, RED); //red
+		data2 = ft_strjoin(data1, RED);
 	free(data1);
-	data1 = ft_strjoin(data2, "$ "); //on ajoute le $
+	data1 = ft_strjoin(data2, "$ ");
 	free(data2);
 	data2 = ft_strjoin(data1, DEFAULT);
 	free(data1);

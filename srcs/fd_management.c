@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   fd_management.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rsl <rsl@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:55:27 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/19 22:43:32 by rsl              ###   ########.fr       */
+/*   Updated: 2023/10/20 11:56:09 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-extern int	status_code;
+extern int	g_status_code;
 
 int	get_fd(int oldfd, char *path, int flags[2])
 {
@@ -56,10 +56,10 @@ t_little	*manage_outfile_1(t_little *node, char **args, int *i)
 		if (node->outfile != -1)
 		{
 			ft_putstr_fd_newline(nl, 2);
-			status_code = 2;
+			g_status_code = 2;
 		}
 		else
-			status_code = 1;
+			g_status_code = 1;
 	}
 	return (node);
 }
@@ -81,10 +81,10 @@ t_little	*manage_outfile_2(t_little *node, char **args, int *i)
 		if (node->outfile != -1)
 		{
 			ft_putstr_fd_newline(nl, 2);
-			status_code = 2;
+			g_status_code = 2;
 		}
 		else
-			status_code = 1;
+			g_status_code = 1;
 	}
 	return (node);
 }
@@ -106,10 +106,10 @@ t_little	*manage_infile_1(t_little *node, char **args, int *i)
 		if (node->infile != -1)
 		{
 			ft_putstr_fd_newline(nl, 2);
-			status_code = 2;
+			g_status_code = 2;
 		}
 		else
-			status_code = 1;
+			g_status_code = 1;
 	}
 	return (node);
 }
@@ -137,7 +137,7 @@ t_little	*manage_infile_2(t_little *node, char **args, int *i)
 		if (node->infile != -1)
 		{
 			ft_putstr_fd_newline(nl, 2);
-			status_code = 2;
+			g_status_code = 2;
 		}
 	}
 	return (node);

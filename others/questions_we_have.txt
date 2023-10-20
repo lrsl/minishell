@@ -15,7 +15,7 @@ ajouter la libft, notamment pour :
 
 ajouter en haut des docs :
 		#include "minishell.h"
-		extern int	status_code;
+		extern int	g_status_code;
 
 
 ON DOING
