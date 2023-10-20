@@ -6,13 +6,11 @@
 /*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:54:22 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/20 11:56:09 by rroussel         ###   ########.fr       */
+/*   Updated: 2023/10/20 14:18:55 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-extern int	g_status_code;
 
 int	recoded_builtin_cd(t_big *big)
 {

@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   f_exec_mainpart.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anmassy <anmassy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:55:48 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/20 13:33:33 by anmassy          ###   ########.fr       */
+/*   Updated: 2023/10/20 14:19:34 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+extern int	g_status_code;
 
 void	child_process_builtin(t_big *bigstruct, t_little *node, int len, \
 	t_list *cmd)
@@ -108,25 +110,4 @@ void	*forking_verif(t_big *bigstruct, t_list *command, int fd[2])
 	if (dir)
 		closedir(dir);
 	return ("");
-}
-
-void	*main_exec(t_big *bigstruct, t_list *command)
-{
-	int		fd[2];
-
-	access_command(bigstruct, command, NULL, NULL);
-	if (pipe(fd) == -1)
-		return (error_function(PIPERR, NULL, 1));
-	if (!forking_verif(bigstruct, command, fd))
-		return (NULL);
-	close(fd[WRITE_END]);
-	if (command->next && !((t_little *)command->next->content)->infile)
-		((t_little *)command->next->content)->infile = fd[READ_END];
-	else
-		close(fd[READ_END]);
-	if (((t_little *)command->content)->infile > 2)
-		close(((t_little *)command->content)->infile);
-	if (((t_little *)command->content)->outfile > 2)
-		close(((t_little *)command->content)->outfile);
-	return (NULL);
 }

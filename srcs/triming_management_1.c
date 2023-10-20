@@ -3,44 +3,42 @@
 /*                                                        :::      ::::::::   */
 /*   triming_management_1.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anmassy <anmassy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:54:33 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/20 13:41:53 by anmassy          ###   ########.fr       */
+/*   Updated: 2023/10/20 13:50:46 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static int	ft_wordcounting(const char *str, \
-	char *target, int count[2])
+static int	ft_wordcounting(const char *str, char *target, int c[2])
 {
-	int		quote[2];
+	int		q[2];
 
-	quote[0] = 0;
-	quote[1] = 0;
-	while (str[count[0]] != '\0')
+	q[0] = 0;
+	q[1] = 0;
+	while (str[c[0]] != '\0')
 	{
-		if (!ft_strchr(target, str[count[0]]))
+		if (!ft_strchr(target, str[c[0]]))
 		{
-			count[1]++;
-			while ((!ft_strchr(target, str[count[0]]) \
-			|| quote[0]) && str[count[0]] != '\0')
+			c[1]++;
+			while ((!ft_strchr(target, str[c[0]]) || q[0]) && str[c[0]] != '\0')
 			{
-				if (!quote[1] && (str[count[0]] == '\"' \
-				|| str[count[0]] == '\''))
-					quote[1] = str[count[0]];
-				quote[0] = (quote[0] + (str[count[0]] == quote[1])) % 2;
-				quote[1] *= quote[0] != 0;
-				count[0]++;
+				if (!q[1] && (str[c[0]] == '\"' \
+				|| str[c[0]] == '\''))
+					q[1] = str[c[0]];
+				q[0] = (q[0] + (str[c[0]] == q[1])) % 2;
+				q[1] *= q[0] != 0;
+				c[0]++;
 			}
-			if (quote[0])
+			if (q[0])
 				return (-1);
 		}
 		else
-			count[0]++;
+			c[0]++;
 	}
-	return (count[1]);
+	return (c[1]);
 }
 
 static char	**put_in_tab(char **tab, char const *str, char *target, int i[3])
