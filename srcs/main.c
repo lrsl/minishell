@@ -6,13 +6,13 @@
 /*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:55:11 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/20 14:19:56 by rroussel         ###   ########.fr       */
+/*   Updated: 2023/10/20 14:28:52 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-extern int	g_status_code;
+int	g_status_code;
 
 void	*main_exec(t_big *bigstruct, t_list *command)
 {
