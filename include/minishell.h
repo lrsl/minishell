@@ -3,10 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+<<<<<<< HEAD
 /*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 14:21:17 by rroussel          #+#    #+#             */
 /*   Updated: 2023/10/20 12:13:16 by rroussel         ###   ########.fr       */
+=======
+/*   By: anmassy <anmassy@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/10/19 14:21:17 by rroussel          #+#    #+#             */
+/*   Updated: 2023/10/20 11:53:11 by anmassy          ###   ########.fr       */
+>>>>>>> c8481b4aede50602939760199cd48eb116e4e6b7
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +68,6 @@ typedef struct s_little
 	int		outfile;
 }			t_little;
 
-
 enum	e_error_enum
 {
 	QUOTE = 1,
@@ -76,8 +82,6 @@ enum	e_error_enum
 	IS_DIR = 12,
 	NOT_DIR = 13
 };
-
-///////////////////* fonction */////////////////////
 
 int				ft_atoi(const char *nptr);
 
@@ -153,13 +157,15 @@ void			cd_error(char **str[2]);
 char			*path_expanding(char *str, int i, int quotes[2], char *var);
 char			*var_expanding(char *str, int i, int quotes[2], t_big *big);
 
-void			child_process_builtin(t_big *bigstruct, t_little *node, int len, t_list *command);
+void			child_process_builtin(t_big *bigstruct, t_little *node, \
+					int len, t_list *command);
 void			*child_process(t_big *bigstruct, t_list *command, int fd[2]);
 void			forking_exec(t_big *bigstruct, t_list *command, int fd[2]);
 void			*forking_verif(t_big *bigstruct, t_list *command, int fd[2]);
 void			*main_exec(t_big *bigstruct, t_list *command);
 
-void			access_command(t_big *bigstruct, t_list *command, char **s, char *path);
+void			access_command(t_big *bigstruct, t_list *command, \
+					char **s, char *path);
 
 int				get_fd(int oldfd, char *path, int flags[2]);
 t_little		*manage_outfile_1(t_little *node, char **args, int *i);
@@ -178,7 +184,8 @@ void			*args_verif(char *out, t_big *big);
 char			*custom_prompt(t_big big);
 
 int				ft_here_doc(char *str[2], char *aux[2]);
-char			*ft_here_doc_str(char *str[2], size_t len, char *limit, char *trigger);
+char			*ft_here_doc_str(char *str[2], size_t len, char *limit, \
+					char *trigger);
 
 void			signal_management(int signal);
 
@@ -200,8 +207,5 @@ char			*gnl_substr(char const *s, unsigned int start, size_t len);
 size_t			gnl_strlcpy(char *dst, const char *src, size_t size);
 int				gnl_strchr_i(const char *s, int c);
 size_t			gnl_strlcat(char *dst, const char *src, size_t size);
-
-
-////////////////////////////////////////////////////
 
 #endif

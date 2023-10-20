@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_tab_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anmassy <anmassy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:53:13 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/18 13:17:36 by rroussel         ###   ########.fr       */
+/*   Updated: 2023/10/20 11:57:05 by anmassy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	ft_tablen(char **tab)
 		i++;
 	return (i);
 }
-
 
 char	**ft_duptab(char **tab)
 {
@@ -48,8 +47,6 @@ char	**ft_duptab(char **tab)
 	return (out);
 }
 
-
-//to add to libft, to free a nxn tab, super utile dans plein de cas
 void	ft_tabfree(char ***tab)
 {
 	int	i;
@@ -96,7 +93,6 @@ char	**ft_biggertab(char **in, char *newstr)
 	return (out);
 }
 
-// pour remplacer le contenu de big a l'index par le contenu de new, et retourner big
 char	**ft_tab_row_n_replace(char ***big, char **new, int index)
 {
 	char	**aux;
@@ -122,5 +118,3 @@ char	**ft_tab_row_n_replace(char ***big, char **new, int index)
 	*big = aux;
 	return (*big);
 }
-
-
