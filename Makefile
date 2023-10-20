@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+         #
+#    By: anmassy <anmassy@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/19 16:19:57 by rroussel          #+#    #+#              #
-#    Updated: 2023/10/20 12:13:10 by rroussel         ###   ########.fr        #
+#    Updated: 2023/10/20 13:44:07 by anmassy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,8 @@ SRC =	srcs/builtins_list.c \
 	srcs/utils/ft_putstr_fd_newline.c \
 	srcs/utils/ft_puttab_fd.c \
 	srcs/utils/ft_split.c \
-	srcs/utils/ft_str_utils.c \
+	srcs/utils/ft_str_utils_1.c \
+	srcs/utils/ft_str_utils_2.c \
 	srcs/utils/ft_strchr.c \
 	srcs/utils/ft_strjoin.c \
 	srcs/utils/ft_tab_utils.c \

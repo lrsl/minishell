@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   little_struct_management_1.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anmassy <anmassy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:55:23 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/20 12:06:20 by rroussel         ###   ########.fr       */
+/*   Updated: 2023/10/20 13:28:49 by anmassy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,32 +77,31 @@ static t_list	*filling_finished(t_list *commands, char **args, char **temp)
 	return (NULL);
 }
 
-t_list	*put_in_nodes(char **tab_of_args, int i)
+t_list	*put_in_nodes(char **tab, int i)
 {
 	t_list	*commands[2];
 	char	**temp[2];
 
 	commands[0] = NULL;
-	temp[1] = dup_trim(tab_of_args);
-	while (tab_of_args[++i])
+	temp[1] = dup_trim(tab);
+	while (tab[++i])
 	{
 		commands[1] = ft_lstlast(commands[0]);
-		if (i == 0 || (tab_of_args[i][0] == '|' && tab_of_args[i + 1] \
-		&& tab_of_args[i + 1][0]))
+		if (i == 0 || (tab[i][0] == '|' && tab[i + 1] && tab[i + 1][0]))
 		{
-			i += tab_of_args[i][0] == '|';
+			i += tab[i][0] == '|';
 			ft_lstadd_back(&commands[0], ft_lstnew(prepare_little()));
 			commands[1] = ft_lstlast(commands[0]);
 		}
-		temp[0] = tab_of_args;
+		temp[0] = tab;
 		commands[1]->content = adapt_to_param_type(commands[1]->content, \
 		temp, &i);
 		if (i < 0)
-			return (filling_finished(commands[0], tab_of_args, temp[1]));
-		if (!tab_of_args[i])
+			return (filling_finished(commands[0], tab, temp[1]));
+		if (!tab[i])
 			break ;
 	}
 	ft_tabfree(&temp[1]);
-	ft_tabfree(&tab_of_args);
+	ft_tabfree(&tab);
 	return (commands[0]);
 }

@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   f_exec_mainpart.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anmassy <anmassy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:55:48 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/20 12:16:19 by rroussel         ###   ########.fr       */
+/*   Updated: 2023/10/20 13:33:33 by anmassy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-extern int	g_status_code;
 
 void	child_process_builtin(t_big *bigstruct, t_little *node, int len, \
 	t_list *cmd)

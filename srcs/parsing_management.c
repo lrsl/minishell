@@ -6,13 +6,11 @@
 /*   By: anmassy <anmassy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:54:58 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/20 13:11:02 by anmassy          ###   ########.fr       */
+/*   Updated: 2023/10/20 13:33:24 by anmassy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-extern int	g_status_code;
 
 char	**final_split(char **tab, t_big *big)
 {
