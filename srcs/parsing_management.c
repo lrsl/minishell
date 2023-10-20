@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_management.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anmassy <anmassy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:54:58 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/20 12:08:57 by rroussel         ###   ########.fr       */
+/*   Updated: 2023/10/20 13:11:02 by anmassy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	*args_parsing(char **tab, t_big *big)
 		return (big);
 	i = ft_lstsize(big->commands);
 	g_status_code = builtin(big, big->commands, &trigger, 0);
-	while (i-- > 0) 
+	while (i-- > 0)
 		waitpid(-1, &g_status_code, 0);
 	if (!trigger && g_status_code == 13)
 		g_status_code = 0;

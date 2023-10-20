@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expander_management.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anmassy <anmassy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:55:53 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/20 12:01:52 by rroussel         ###   ########.fr       */
+/*   Updated: 2023/10/20 13:11:46 by anmassy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,10 @@ char	*var_expanding(char *str, int i, int quotes[2], t_big *big)
 		quotes[0] = (quotes[0] + (!quotes[1] && str[i] == '\'')) % 2;
 		quotes[1] = (quotes[1] + (!quotes[0] && str[i] == '\"')) % 2;
 		if (!quotes[0] && str[i] == '$' && str[i + 1] \
-		&& ((ft_strchr_str(&str[i + 1],\ "/~%^{}:; ") && !quotes[1]) \
-		|| (ft_strchr_str(&str[i + 1], "/~%^{}:;\"") && quotes[1])))
-			return (var_expanding(substr_var_expanding(str, ++i, big), -1, quotes, big));
+			&& ((ft_strchr_str(&str[i + 1], "/~%^{}:; ") && !quotes[1]) \
+			|| (ft_strchr_str(&str[i + 1], "/~%^{}:;\"") && quotes[1])))
+			return (var_expanding(substr_var_expanding(str, ++i, big), \
+				-1, quotes, big));
 	}
 	return (str);
 }
