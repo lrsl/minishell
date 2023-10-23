@@ -140,3 +140,11 @@ Explciation pour mon Tonio: La premiere ligne regarde si la position actuelle es
 Pareil pour la deuxienme ligne, mais pour les doubles quotes.
 _____________________
 _____________________
+
+
+COMPILATION
+
+j'ai cree un fichier .txt (valgrind_readline_leak_ignore) qui filtre les leaks car dans le sujet il est stipuler que l'on doit pas gerer les leak de readline alors j'ai cree un script qui permet de ne pas les affiher et de montrer l'essentiel.
+
+pour compiler il te suffit de faire cette commande :
+	valgrind --suppressions=valgrind_readline_leaks_ignore.txt --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes ../minishell

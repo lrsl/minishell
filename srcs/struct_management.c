@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct_management.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anmassy <anmassy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:54:39 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/20 14:20:25 by rroussel         ###   ########.fr       */
+/*   Updated: 2023/10/23 11:51:42 by anmassy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_big	fill_struct(t_big bigstruct, char *str, char **av)
 		nb = ft_itoa(ft_atoi(str) + 1);
 	free(str);
 	bigstruct.env = do_env("SHLVL", nb, bigstruct.env, 5);
+	free(nb);
 	str = find_env("PATH", bigstruct.env, 4);
 	if (!str)
 		bigstruct.env = do_env("PATH", \
