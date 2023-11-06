@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_exec_mainpart.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anmassy <anmassy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:55:48 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/20 14:19:34 by rroussel         ###   ########.fr       */
+/*   Updated: 2023/11/06 10:18:59 by anmassy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void	*child_process(t_big *bigstruct, t_list *command, int fd[2])
 	child_process_next(command, fd);
 	close(fd[READ_END]);
 	child_process_builtin(bigstruct, node, len, command);
+	ft_tabfree(&bigstruct->env); //ici
 	ft_lstclear(&bigstruct->commands, free_function);
 	exit(g_status_code);
 }

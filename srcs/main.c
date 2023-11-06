@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anmassy <anmassy@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:55:11 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/20 14:28:52 by rroussel         ###   ########.fr       */
+/*   Updated: 2023/11/06 10:17:18 by anmassy          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,6 @@ int	main(int ac, char **av, char **env)
 		if (!args_verif(displayed, &big))
 			break ;
 	}
+	ft_tabfree(&big.env);
 	exit(g_status_code);
 }
