@@ -6,7 +6,7 @@
 #    By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/19 16:19:57 by rroussel          #+#    #+#              #
-#    Updated: 2023/11/06 11:04:29 by rroussel         ###   ########.fr        #
+#    Updated: 2023/11/09 15:10:38 by rroussel         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,3 +95,7 @@ re : fclean all
 	@echo "↪ Finished, $(COLOUR_BLUE)re-make$(COLOUR_END) $(COLOUR_GREEN)done$(COLOUR_END)"
 
 .PHONY : all clean fclean re
+
+
+
+## valgrind --suppressions=others/valgrind_readline_leaks_ignore.txt --leak-check=full --show-leak-kinds=all --track-fds=yes --track-origins=yes ./minishell
