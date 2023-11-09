@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_management.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anmassy <anmassy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:54:58 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/25 13:38:34 by anmassy          ###   ########.fr       */
+/*   Updated: 2023/11/09 11:42:35 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void	*args_verif(char *out, t_big *big)
 	char		**tab;
 	t_little	*node;
 
+	ft_save_pwd_value(big);
 	if (!out)
 		return (printf("exit\n"), NULL);
 	if (out[0] != '\0')

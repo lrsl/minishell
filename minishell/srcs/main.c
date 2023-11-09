@@ -6,13 +6,27 @@
 /*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:55:11 by rroussel          #+#    #+#             */
-/*   Updated: 2023/11/09 10:13:55 by rroussel         ###   ########.fr       */
+/*   Updated: 2023/11/09 11:42:00 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
 int	g_status_code;
+
+void	ft_save_pwd_value(t_big *big)
+{
+	char	*buf_pwd;
+
+	buf_pwd = getcwd(NULL, 0);
+	if (buf_pwd)
+	{
+		if (big->pwd_save)
+			free(big->pwd_save);
+		big->pwd_save = getcwd(NULL, 0);
+	}
+	free(buf_pwd);
+}
 
 void	*main_exec(t_big *bigstruct, t_list *command)
 {
@@ -40,21 +54,14 @@ int	main(int ac, char **av, char **env)
 	char	*str;
 	char	*displayed;
 	t_big	big;
-	char	*buf_pwd;
 
+	if (!isatty(0))
+		exit (1);
 	big = struct_init(av, env);
 	while (av && ac)
 	{
 		signal(SIGINT, signal_management);
 		signal(SIGQUIT, SIG_IGN);
-		buf_pwd = getcwd(NULL, 0);
-		if (buf_pwd)
-		{
-			if (big.pwd_save)
-				free(big.pwd_save);
-			big.pwd_save = getcwd(NULL, 0);
-		}
-		free(buf_pwd);
 		str = custom_prompt(big);
 		if (str)
 			displayed = readline(str);

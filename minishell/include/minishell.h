@@ -6,7 +6,7 @@
 /*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 13:13:37 by anmassy           #+#    #+#             */
-/*   Updated: 2023/11/06 15:37:01 by rroussel         ###   ########.fr       */
+/*   Updated: 2023/11/09 11:41:23 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ char			**ft_biggertab(char **in, char *newstr);
 char			**ft_tab_row_n_replace(char ***big, char **new, int index);
 void			get_user_util(char ***out, char *full, char *av, char **env);
 int				ft_isdigit(int c);
+void			ft_save_pwd_value(t_big *big);
 int				ft_isspace(char c);
 int				recoded_builtin_cd(t_big *big);
 int				recoded_builtin_pwd(t_big *bigstruct);
