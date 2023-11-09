@@ -42,3 +42,13 @@ ON DOING
 2. finir exec main part file
 
 3. trouver et adapter builtin ENV 
+
+
+______________________________________________-
+
+exit avec valgrind ?
+retour a la ligne apres "cat" + "ctrl + \" ? //godjo OK
+unset PATH, then set PATH=directory1:directory2 //OK !, mais export ecrase les valeurs donc export en full path, pas "export PATH=$PATH:$PWD"
+tester encore redirections + pipes //a faire
+quand simple/double quote pas fermée + enter, ouvrir un prompt ? //godjo OK
+probleme quand on cree un dossier qui a le nom d'une commande ("ls" par exemple), et qu'on essaie ensuite d'exec la commande du meme nom

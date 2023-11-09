@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anmassy <anmassy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 13:13:37 by anmassy           #+#    #+#             */
-/*   Updated: 2023/11/06 10:19:19 by anmassy          ###   ########.fr       */
+/*   Updated: 2023/11/06 15:37:01 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_big
 	t_list	*commands;
 	char	**env;
 	pid_t	pid;
+	char	*pwd_save;
 }			t_big;
 
 typedef struct s_little
@@ -117,7 +118,7 @@ void			get_user_util(char ***out, char *full, char *av, char **env);
 int				ft_isdigit(int c);
 int				ft_isspace(char c);
 int				recoded_builtin_cd(t_big *big);
-int				recoded_builtin_pwd(void);
+int				recoded_builtin_pwd(t_big *bigstruct);
 int				recoded_builtin_echo(t_list *cmd);
 int				recoded_builtin_export(t_big *big);
 int				recoded_builtin_unset(t_big *big);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   f_exec_mainpart.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anmassy <anmassy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:55:48 by rroussel          #+#    #+#             */
-/*   Updated: 2023/11/06 10:23:26 by anmassy          ###   ########.fr       */
+/*   Updated: 2023/11/09 10:15:45 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	child_process_builtin(t_big *bigstruct, t_little *node, int len, \
 		execve(node->path, node->command, bigstruct->env);
 	else if (node->command && !ft_strncmp(*node->command, "pwd", len) \
 		&& len == 3)
-		g_status_code = recoded_builtin_pwd();
+		g_status_code = recoded_builtin_pwd(bigstruct);
 	else if (verif_builtin(node) && node->command && \
 		!ft_strncmp(*node->command, "echo", len) && len == 4)
 		g_status_code = recoded_builtin_echo(cmd);
@@ -71,6 +71,7 @@ void	*child_process(t_big *bigstruct, t_list *command, int fd[2])
 	close(fd[READ_END]);
 	child_process_builtin(bigstruct, node, len, command);
 	ft_tabfree(&bigstruct->env);
+	free(bigstruct->pwd_save);
 	ft_lstclear(&bigstruct->commands, free_function);
 	exit(g_status_code);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anmassy <anmassy@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:55:11 by rroussel          #+#    #+#             */
-/*   Updated: 2023/11/06 10:17:18 by anmassy          ###   ########.fr       */
+/*   Updated: 2023/11/09 10:13:55 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,21 @@ int	main(int ac, char **av, char **env)
 	char	*str;
 	char	*displayed;
 	t_big	big;
+	char	*buf_pwd;
 
 	big = struct_init(av, env);
 	while (av && ac)
 	{
 		signal(SIGINT, signal_management);
 		signal(SIGQUIT, SIG_IGN);
+		buf_pwd = getcwd(NULL, 0);
+		if (buf_pwd)
+		{
+			if (big.pwd_save)
+				free(big.pwd_save);
+			big.pwd_save = getcwd(NULL, 0);
+		}
+		free(buf_pwd);
 		str = custom_prompt(big);
 		if (str)
 			displayed = readline(str);
@@ -53,7 +62,10 @@ int	main(int ac, char **av, char **env)
 			displayed = readline("guest@minishell $ ");
 		free(str);
 		if (!args_verif(displayed, &big))
+		{
+			free(big.pwd_save);
 			break ;
+		}
 	}
 	ft_tabfree(&big.env);
 	exit(g_status_code);

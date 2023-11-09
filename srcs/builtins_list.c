@@ -6,7 +6,7 @@
 /*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:54:22 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/20 14:24:37 by rroussel         ###   ########.fr       */
+/*   Updated: 2023/11/09 10:10:38 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,15 @@ int	recoded_builtin_cd(t_big *big)
 	return (g_status_code);
 }
 
-int	recoded_builtin_pwd(void)
+int	recoded_builtin_pwd(t_big *bigstruct)
 {
 	char	*buf;
 
 	buf = getcwd(NULL, 0);
-	ft_putendl_fd(buf, 1);
+	if (buf)
+		ft_putendl_fd(buf, 1);
+	else
+		ft_putendl_fd(bigstruct->pwd_save, 1);
 	free(buf);
 	return (0);
 }

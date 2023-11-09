@@ -6,7 +6,7 @@
 /*   By: rroussel <rroussel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 11:54:39 by rroussel          #+#    #+#             */
-/*   Updated: 2023/10/20 11:56:09 by rroussel         ###   ########.fr       */
+/*   Updated: 2023/11/09 09:22:02 by rroussel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ t_big	struct_init(char **av, char **env)
 	bigstruct.commands = NULL;
 	bigstruct.env = ft_duptab(env); //copie de env
 	g_status_code = 0;
+	bigstruct.pwd_save = NULL;
 	ft_getpid(&bigstruct);
 	bigstruct = fill_struct(bigstruct, str, av); //remplir la structure avec les vraies valeurs
 	return (bigstruct);
